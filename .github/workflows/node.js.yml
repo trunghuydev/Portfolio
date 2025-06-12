@@ -22,5 +22,5 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Building System
-        working-directory: ./Portfolio
+        working-directory: ./portfolio
         run: docker compose up -d --build --force-recreate
