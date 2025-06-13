@@ -1,3 +1,5 @@
+import ScrollFloat from '@/Util/Animation/scrollFloat';
+
 type AboutProps = {
   background: string;
   mindset: string;
@@ -8,12 +10,23 @@ const About = ({ background, mindset, avatarUrl }: AboutProps) => {
   return (
     <section className="px-6 py-12 text-gray-700 bg-white">
       <div className="max-w-6xl mx-auto">
-        <h2 className="mb-2 text-3xl font-bold text-center text-purple-700">About Me</h2>
-        <p className="mb-10 text-sm text-center text-gray-500">
-          Passionate developer with 5+ years of experience creating innovative digital solutions
-        </p>
+        <div className="flex flex-col items-center mb-10 text-center">
+          <ScrollFloat
+            animationDuration={1.2}
+            ease="back.out(1.7)"
+            scrollStart="top 80%"
+            scrollEnd="bottom 60%"
+            stagger={0.03}
+          >
+            <h2 className="mb-2 text-3xl font-bold text-purple-700">About</h2>
+          </ScrollFloat>
 
-        <div className="flex flex-col items-center gap-8 md:flex-row">
+          <p className="text-sm text-gray-500">
+            Passionate developer with 5+ years of experience creating innovative digital solutions
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
           {/* Avatar */}
           <img
             src={avatarUrl}

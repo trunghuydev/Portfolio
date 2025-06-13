@@ -1,15 +1,47 @@
-import About from '@/Components/About/About';
-import Experience from '@/Components/Experience/Experience';
-import Personal from '@/Components/Personal/personal';
-import data from '@/MockData/cv1';
 import React from 'react';
+import About from '@/Components/About/About';
+import Contact from '@/Components/Contact/Contact';
+import Experience from '@/Components/Experience/Experience';
+import Footer from '@/Components/Footer/Footer';
+import Personal from '@/Components/Personal/personal';
+import Projects from '@/Components/Projects/Project';
+import Skills from '@/Components/Skills/Skill';
+
+import data from '@/MockData/cv1';
+import Navbar from '@/Components/Header/Header';
 
 const Portfolio: React.FC = () => {
   return (
     <>
-      <Personal {...data.personal} />
-      <About background={data.about.background} mindset={data.about.mindset} avatarUrl={''} />
-      <Experience items={data.experience} />
+      <Navbar />
+
+      <main className=" scroll-smooth">
+        <section id="home">
+          <Personal {...data.personal} />
+        </section>
+
+        <section id="about">
+          <About background={data.about.background} mindset={data.about.mindset} avatarUrl={''} />
+        </section>
+
+        <section id="experience">
+          <Experience items={data.experience} />
+        </section>
+
+        <section id="projects">
+          <Projects projects={data.projects} />
+        </section>
+
+        <section id="skills">
+          <Skills skillGroups={data.skills} />
+        </section>
+
+        <section id="contact">
+          <Contact />
+        </section>
+
+        <Footer />
+      </main>
     </>
   );
 };

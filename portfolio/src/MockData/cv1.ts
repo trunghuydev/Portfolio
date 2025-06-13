@@ -45,21 +45,48 @@ const cv1 = {
 
   projects: [
     {
-      title: 'E-Commerce Platform',
-      description: 'A scalable, responsive e-commerce app with Stripe integration.',
-      link: '#',
-    },
-    {
-      title: 'Portfolio Website',
-      description: 'My personal portfolio built with React, Tailwind CSS, and hosted on Vercel.',
-      link: '#',
-    },
-    {
-      title: 'Mobile UI Kit',
-      description: 'Cross-platform UI components used in several apps.',
-      link: '#',
-    },
+    title: 'E-Commerce Platform',
+    description: 'A full-stack e-commerce solution with modern UI and secure payment processing.',
+    techs: ['React', 'Node.js', 'MongoDB'],
+    codeLink: '#',
+    link: '#',
+    image: '/images/ecommerce.jpg',
+  },
+  {
+    title: 'Task Management App',
+    description: 'Collaborative task management tool with real-time updates and team features.',
+    techs: ['Vue.js', 'Express', 'PostgreSQL'],
+    codeLink: '#',
+    link: '#',
+    image: '/images/task-app.jpg',
+  },
+  {
+    title: 'Mobile App Design',
+    description: 'Modern mobile app with intuitive UX and beautiful animations.',
+    techs: ['React Native', 'Firebase', 'Figma'],
+    codeLink: '#',
+    link: '#',
+    image: '/images/mobile-ui.jpg',
+  },
   ],
+
+  skills:[
+  {
+    category: 'Frontend Development',
+    color: 'text-blue-600',
+    skills: ['React / Next.js', 'TypeScript', 'Vue.js', 'CSS / Tailwind'],
+  },
+  {
+    category: 'Backend Development',
+    color: 'text-purple-600',
+    skills: ['Node.js / Express', 'Python / Django', 'PostgreSQL / MongoDB', 'AWS / Docker'],
+  },
+  {
+    category: 'Design & Tools',
+    color: 'text-cyan-600',
+    skills: ['Figma', 'Adobe XD', 'Git & GitHub', 'Vercel / Netlify'],
+  },
+],
 };
 
 export default cv1;

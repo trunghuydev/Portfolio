@@ -1,3 +1,5 @@
+import ScrollFloat from '@/Util/Animation/scrollFloat';
+
 export type ExperienceItem = {
   title: string;
   company: string;
@@ -19,10 +21,21 @@ const getTextColor = (index: number) => {
 const Experience = ({ items }: { items: ExperienceItem[] }) => {
   return (
     <section className="max-w-5xl px-6 py-16 mx-auto">
-      <h2 className="mb-2 text-4xl font-bold text-center text-purple-600">Experience</h2>
-      <p className="mb-10 text-center text-gray-500">My professional journey</p>
+      {/* Title & Description */}
+      <div className="flex flex-col items-center mb-10 text-center">
+        <ScrollFloat
+          animationDuration={1.2}
+          ease="back.out(1.7)"
+          scrollStart="top 80%"
+          scrollEnd="bottom 60%"
+          stagger={0.03}
+        >
+          <h2 className="mb-2 text-4xl font-bold text-purple-600">Experience</h2>
+        </ScrollFloat>
+        <p className="text-gray-500">My professional journey</p>
+      </div>
 
-      {/* Container with vertical gradient line */}
+      {/* Timeline */}
       <div className="relative ml-6">
         {/* Vertical timeline gradient line */}
         <div className="absolute top-0 left-0 w-0.5 h-full rounded-full bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-400" />
@@ -33,7 +46,7 @@ const Experience = ({ items }: { items: ExperienceItem[] }) => {
             <span
               className={`absolute w-4 h-4 border-[3px] ${getDotColor(
                 idx
-              )} rounded-full -left-[1.9rem] top-0.3`}
+              )} rounded-full -left-[1.9rem] top-0.5`}
             ></span>
 
             {/* Card */}
