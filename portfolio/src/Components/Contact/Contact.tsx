@@ -17,10 +17,9 @@ type ContactItemProps = {
 };
 
 const ContactItem: React.FC<ContactItemProps> = ({ Icon, text }) => {
-  const StyledIcon = Icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
   return (
     <div className="flex items-center gap-3">
-      <StyledIcon className="text-purple-600" size={20} />
+      <Icon className="text-purple-600" size={20} />
       <span>{text}</span>
     </div>
   );
@@ -66,14 +65,11 @@ const Contact: React.FC = () => {
           <div>
             <h4 className="mb-2 font-semibold text-gray-800 text-md">Follow Me</h4>
             <div className="flex gap-4 text-xl text-gray-600">
-              {socialIcons.map(({ icon: Icon, label }) => {
-                const StyledIcon = Icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
-                return (
-                  <a href="#" aria-label={label} key={label}>
-                    <StyledIcon className="transition-colors hover:text-purple-600" />
-                  </a>
-                );
-              })}
+              {socialIcons.map(({ icon: Icon, label }) => (
+                <a href="#" aria-label={label} key={label}>
+                  <Icon className="transition-colors hover:text-purple-600" size={20} />
+                </a>
+              ))}
             </div>
           </div>
         </div>
