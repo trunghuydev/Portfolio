@@ -10,17 +10,17 @@ function ReactQueryProvider({ children }: Props) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        // refetchOnWindowFocus: false,
+        refetchOnWindowFocus: false,
       },
     },
     queryCache: new QueryCache({
       onError: (err) => {
-        // console.log('QueryCache', err);
+        console.log('QueryCache', err);
       },
     }),
     mutationCache: new MutationCache({
       onError: (err) => {
-        // console.log('mutationCache', err);
+        console.log('mutationCache', err);
       },
     }),
   });
