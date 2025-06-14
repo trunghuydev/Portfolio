@@ -24,7 +24,8 @@ axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
     const res = error.response;
-
+    console.log('Error response:', res);
+    
     
     if (
       typeof error?.message === 'string' &&
