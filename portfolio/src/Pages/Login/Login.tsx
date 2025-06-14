@@ -1,23 +1,34 @@
-import { useAuth } from '@/Context/AuthContext';
 import { useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
+import { Login } from '@/Interface/auth';
+import { useLogin } from './Hook/useLogin';
 
 export default function LoginPage() {
-  const { login } = useAuth();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const loginMutation = useLogin();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login(username, password);
-    if (success) {
-      navigate('/my-cv'); // chuyển về trang chính
-    } else {
-      setError('Sai tên đăng nhập hoặc mật khẩu');
-    }
+
+    const payload: Login = {
+      username,
+      password,
+    };
+
+    setError('');
+
+    loginMutation.mutate(payload, {
+      onSuccess: () => {
+        navigate('/');
+      },
+      onError: () => {
+        setError('Sai tên đăng nhập hoặc mật khẩu');
+      },
+    });
   };
 
   return (
@@ -54,9 +65,10 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full py-2 font-semibold text-white transition bg-blue-600 rounded-md hover:bg-blue-700"
+            disabled={loginMutation.status === 'pending'}
+            className="w-full py-2 font-semibold text-white transition bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-60"
           >
-            Đăng nhập
+            {loginMutation.status === 'pending' ? 'Đang đăng nhập...' : 'Đăng nhập'}
           </button>
         </form>
       </div>
