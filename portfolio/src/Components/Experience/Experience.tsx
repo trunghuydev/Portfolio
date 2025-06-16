@@ -20,9 +20,9 @@ const getTextColor = (index: number) => {
 
 const Experience = ({ items }: { items: ExperienceItem[] }) => {
   return (
-    <section className="max-w-5xl px-6 py-16 mx-auto">
+    <section className="max-w-5xl px-6 py-24 mx-auto">
       {/* Title & Description */}
-      <div className="flex flex-col items-center mb-10 text-center">
+      <div className="flex flex-col items-center text-center mb-14">
         <ScrollFloat
           animationDuration={1.2}
           ease="back.out(1.7)"
@@ -30,39 +30,39 @@ const Experience = ({ items }: { items: ExperienceItem[] }) => {
           scrollEnd="bottom 60%"
           stagger={0.03}
         >
-          <h2 className="mb-2 text-4xl font-bold text-purple-600">Experience</h2>
+          <h2 className="mb-4 text-5xl font-extrabold text-purple-600">Experience</h2>
         </ScrollFloat>
-        <p className="text-gray-500">My professional journey</p>
+        <p className="max-w-xl text-lg text-gray-500">My professional journey</p>
       </div>
 
       {/* Timeline */}
-      <div className="relative ml-6">
+      <div className="relative ml-10">
         {/* Vertical timeline gradient line */}
-        <div className="absolute top-0 left-0 w-0.5 h-full rounded-full bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-400" />
+        <div className="absolute top-0 left-0 w-1 h-full rounded-full bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-400" />
 
         {items.map((item, idx) => (
-          <div key={idx} className="relative mb-12 ml-6 transition-all duration-300 group">
+          <div key={idx} className="relative ml-6 transition-all duration-300 mb-14 group">
             {/* Dot */}
             <span
-              className={`absolute w-4 h-4 border-[3px] ${getDotColor(
+              className={`absolute w-5 h-5 border-[3px] ${getDotColor(
                 idx
-              )} rounded-full -left-[1.9rem] top-0.5`}
+              )} rounded-full -left-[2rem] top-0.5`}
             ></span>
 
             {/* Card */}
-            <div className="bg-white shadow-md rounded-xl p-6 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-[1.02]">
-              <div className="flex items-start justify-between mb-1">
-                <h3 className="text-xl font-semibold text-gray-900">{item.title}</h3>
+            <div className="bg-white shadow-md rounded-2xl p-8 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-[1.02]">
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="text-2xl font-semibold text-gray-900">{item.title}</h3>
                 <span className={`text-sm font-bold ${getTextColor(idx)}`}>{item.years}</span>
               </div>
-              <p className="mb-1 text-gray-700">{item.company}</p>
-              <p className="text-gray-600">{item.description}</p>
+              <p className="mb-2 text-lg text-gray-700">{item.company}</p>
+              <p className="text-base text-gray-600">{item.description}</p>
               {item.skills && (
                 <div className="flex flex-wrap gap-2 mt-4">
                   {item.skills.map((skill, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-full shadow-sm hover:bg-gray-200"
+                      className="px-3 py-1 text-sm font-medium text-gray-700 bg-gray-100 rounded-full shadow-sm hover:bg-gray-200"
                     >
                       {skill}
                     </span>

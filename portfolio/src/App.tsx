@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Portfolio />} />
           <Route path="/login" element={<LoginPage />} />
+          {/* <Route path="/edit-cv" element={<Editcv />} /> */}
         </Routes>
       </Router>
     </AuthProvider>

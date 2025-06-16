@@ -34,6 +34,8 @@ const cv1 = {
     email: 'trunghuy@email.com',
     location: 'Cambodia',
     gpa: '10',
+    school:'hutech',
+    phone: '0123456789',
   },
 
   about: {

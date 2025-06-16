@@ -28,12 +28,12 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="fixed z-50 flex gap-6 px-6 py-2 rounded-full shadow-lg top-6 right-6 backdrop-blur-md bg-white/30">
+    <nav className="fixed z-50 flex gap-8 px-8 py-4 rounded-full shadow-lg top-6 right-6 backdrop-blur-md bg-white/30">
       {NAV_ITEMS.map(({ id, label }) => (
         <a
           key={id}
           href={`#${id}`}
-          className={`text-sm font-medium transition-colors ${
+          className={`text-lg font-semibold transition-colors ${
             activeId === id ? 'text-blue-600' : 'text-black hover:text-blue-500'
           }`}
         >

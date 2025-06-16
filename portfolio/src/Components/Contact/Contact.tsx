@@ -18,7 +18,7 @@ type ContactItemProps = {
 
 const ContactItem: React.FC<ContactItemProps> = ({ Icon, text }) => {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 text-base">
       <Icon className="text-purple-600" size={20} />
       <span>{text}</span>
     </div>
@@ -34,8 +34,8 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="px-6 py-16 bg-blue-50">
-      <div className="flex flex-col items-center mb-10 text-center">
+    <section id="contact" className="px-6 py-24 bg-blue-50">
+      <div className="flex flex-col items-center text-center mb-14">
         <ScrollFloat
           animationDuration={1.2}
           ease="back.out(1.7)"
@@ -43,19 +43,19 @@ const Contact: React.FC = () => {
           scrollEnd="bottom 60%"
           stagger={0.03}
         >
-          <h2 className="mb-2 text-4xl font-bold text-center text-purple-600">
+          <h2 className="mb-4 text-5xl font-extrabold text-center text-purple-600">
             Let's Work Together
           </h2>
         </ScrollFloat>
-        <p className="mb-10 text-center text-gray-500">Ready to bring your ideas to life</p>
+        <p className="text-lg text-center text-gray-500">Ready to bring your ideas to life</p>
       </div>
 
       <div className="grid max-w-6xl grid-cols-1 gap-10 mx-auto md:grid-cols-2">
         {/* LEFT SIDE */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-gray-800">Get In Touch</h3>
-            <div className="space-y-3 text-gray-600">
+            <h3 className="mb-4 text-xl font-semibold text-gray-800">Get In Touch</h3>
+            <div className="space-y-4 text-gray-600">
               <ContactItem Icon={FaEnvelope} text="alex.chen@email.com" />
               <ContactItem Icon={FaPhone} text="+1 (555) 123-4567" />
               <ContactItem Icon={FaMapMarkerAlt} text="San Francisco, CA" />
@@ -63,7 +63,7 @@ const Contact: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="mb-2 font-semibold text-gray-800 text-md">Follow Me</h4>
+            <h4 className="mb-2 text-lg font-semibold text-gray-800">Follow Me</h4>
             <div className="flex gap-4 text-xl text-gray-600">
               {socialIcons.map(({ icon: Icon, label }) => (
                 <a href="#" aria-label={label} key={label}>
@@ -77,17 +77,17 @@ const Contact: React.FC = () => {
         {/* RIGHT SIDE - FORM */}
         <form className="w-full space-y-4">
           <input
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className="w-full p-4 border border-gray-300 rounded-lg"
             type="text"
             placeholder="Your Name"
           />
           <input
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className="w-full p-4 border border-gray-300 rounded-lg"
             type="email"
             placeholder="your.email@example.com"
           />
           <textarea
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className="w-full p-4 border border-gray-300 rounded-lg"
             placeholder="Tell me about your project..."
             rows={4}
           ></textarea>
