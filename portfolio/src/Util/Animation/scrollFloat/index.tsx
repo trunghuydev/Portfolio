@@ -63,7 +63,7 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
           scroller,
           start: scrollStart,
           end: scrollEnd,
-          scrub: 4,
+          scrub: 2,
         },
       }
     );

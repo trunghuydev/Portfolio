@@ -1,45 +1,26 @@
 // pages/Portfolio.tsx
 import React from 'react';
-import About from '@/Components/About/About';
-import Contact from '@/Components/Contact/Contact';
-import Experience from '@/Components/Experience/Experience';
+
 import Footer from '@/Components/Footer/Footer';
-import Personal from '@/Components/Personal/personal';
-import Projects from '@/Components/Projects/Project';
-import Skills from '@/Components/Skills/Skill';
-import Navbar from '@/Components/Header/Header';
-import data from '@/MockData/cv1';
 
 import { useAutoLogin } from '../Login/Hook/useAutoLogin';
+import { useAuthStore } from '@/Store/auth';
+import ProfileContainer from '@/Components/Profile/hook/ProfileContainer';
 
 const Portfolio: React.FC = () => {
-  const username = 'trunghuy';
+  const username = 'trungthanh';
   const password = '123456789';
 
   useAutoLogin(username, password);
 
+  const accessToken = useAuthStore((state) => state.accessToken);
+
+  if (!accessToken) return <p>Bạn chưa đăng nhập.</p>;
+
   return (
     <>
-      <Navbar />
       <main className="scroll-smooth">
-        <section id="home">
-          <Personal {...data.personal} />
-        </section>
-        <section id="about">
-          <About background={data.about.background} mindset={data.about.mindset} avatarUrl={''} />
-        </section>
-        <section id="experience">
-          <Experience items={data.experience} />
-        </section>
-        <section id="projects">
-          <Projects projects={data.projects} />
-        </section>
-        <section id="skills">
-          <Skills skillGroups={data.skills} />
-        </section>
-        <section id="contact">
-          <Contact />
-        </section>
+        <ProfileContainer accessToken={accessToken} />
         <Footer />
       </main>
     </>

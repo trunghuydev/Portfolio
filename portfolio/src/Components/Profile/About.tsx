@@ -1,12 +1,9 @@
+import { PersonalInfo } from '@/Interface/TInformation';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
 
-type AboutProps = {
-  background: string;
-  mindset: string;
-  avatarUrl: string;
-};
+type AboutProps = Pick<PersonalInfo, 'avatar' | 'background' | 'mindset' | 'position_career'>;
 
-const About = ({ background, mindset, avatarUrl }: AboutProps) => {
+const About = ({ background, mindset, avatar, position_career }: AboutProps) => {
   return (
     <section className="px-6 py-20 text-gray-700 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -20,29 +17,19 @@ const About = ({ background, mindset, avatarUrl }: AboutProps) => {
           >
             <h2 className="mb-4 text-5xl font-extrabold text-purple-700">About</h2>
           </ScrollFloat>
-
-          <p className="max-w-xl text-lg text-gray-500">
-            Passionate developer with 5+ years of experience creating innovative digital solutions
-          </p>
+          <p className="max-w-xl text-lg text-gray-500">{position_career}</p>
         </div>
 
         <div className="flex flex-col items-center gap-12 md:flex-row md:items-start">
-          {/* Avatar */}
-          <img
-            src={avatarUrl}
-            alt="Avatar"
-            className="object-cover shadow-lg w-60 h-60 rounded-2xl"
-          />
-
-          {/* Info */}
+          <img src={avatar} alt="Avatar" className="object-cover shadow-lg w-60 h-60 rounded-2xl" />
           <div className="flex-1 space-y-10 text-left">
             <div>
               <h3 className="mb-2 text-2xl font-semibold text-blue-600">Background</h3>
-              <p className="text-lg text-gray-700">{background}</p>
+              <p className="text-lg text-gray-700">{background ?? 'Chưa cập nhật'}</p>
             </div>
             <div>
               <h3 className="mb-2 text-2xl font-semibold text-blue-600">Mindset</h3>
-              <p className="text-lg text-gray-700">{mindset}</p>
+              <p className="text-lg text-gray-700">{mindset ?? 'Chưa cập nhật'}</p>
             </div>
           </div>
         </div>

@@ -1,41 +1,20 @@
-import { useAuthStore } from '@/Store/auth';
+// src/api/createAxiosClient.ts
 import axios from 'axios';
 
+export const createAxiosClient = (accessToken: string) => {
+  const instance = axios.create({
+    baseURL: 'https://my-cv-suxl.onrender.com/api/v1/',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-const axiosClient = axios.create({
-  baseURL: 'https://my-cv-suxl.onrender.com/api/v1/',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-axiosClient.interceptors.request.use(
-  (config) => {
-    const token = useAuthStore.getState().accessToken;
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
+  instance.interceptors.request.use((config) => {
+    if (accessToken && config.headers) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
-  },
-  (error) => Promise.reject(error)
-);
+  });
 
-axiosClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const res = error.response;
-    console.log('Error response:', res);
-    
-    
-    if (
-      typeof error?.message === 'string' &&
-      error.message.includes('status code')
-    ) {
-      error.message = '';
-    }
-
-    return Promise.reject(error);
-  }
-);
-
-export default axiosClient;
+  return instance;
+};

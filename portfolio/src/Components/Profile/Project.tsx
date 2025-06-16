@@ -1,13 +1,5 @@
+import { Project } from '@/Interface/TProject';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
-
-type Project = {
-  title: string;
-  description: string;
-  link?: string;
-  codeLink?: string;
-  image?: string;
-  techs?: string[];
-};
 
 const Projects = ({ projects }: { projects: Project[] }) => {
   return (
@@ -34,28 +26,29 @@ const Projects = ({ projects }: { projects: Project[] }) => {
             className="bg-white rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
           >
             {/* Image */}
-            {project.image && (
+            {project.img_url && (
               <img
-                src={project.image}
-                alt={project.title}
+                src={project.img_url}
+                alt={project.project_name}
                 className="object-cover w-full h-52 rounded-t-2xl"
               />
             )}
 
             {/* Content */}
             <div className="p-6">
-              <h3 className="mb-2 text-2xl font-bold text-gray-800">{project.title}</h3>
+              <h3 className="mb-1 text-xl font-bold text-gray-800">{project.project_name}</h3>
+              <p className="mb-1 text-sm text-gray-500">{project.project_type}</p>
               <p className="mb-4 text-base text-gray-600">{project.description}</p>
 
               {/* Tech stack */}
-              {project.techs && (
+              {project.teches && (
                 <div className="flex flex-wrap gap-2 mb-5">
-                  {project.techs.map((tech, i) => (
+                  {project.teches.map((tech, i) => (
                     <span
                       key={i}
                       className="px-3 py-1 text-sm font-medium text-purple-700 bg-purple-100 rounded-full"
                     >
-                      {tech}
+                      {tech.tech_name}
                     </span>
                   ))}
                 </div>
@@ -63,9 +56,9 @@ const Projects = ({ projects }: { projects: Project[] }) => {
 
               {/* Links */}
               <div className="flex gap-6 text-base font-medium">
-                {project.codeLink && (
+                {project.url_github && (
                   <a
-                    href={project.codeLink}
+                    href={project.url_github}
                     target="_blank"
                     className="text-purple-600 hover:underline"
                     rel="noopener noreferrer"
@@ -73,9 +66,9 @@ const Projects = ({ projects }: { projects: Project[] }) => {
                     Code
                   </a>
                 )}
-                {project.link && (
+                {project.url_demo && (
                   <a
-                    href={project.link}
+                    href={project.url_demo}
                     target="_blank"
                     className="text-blue-500 hover:underline"
                     rel="noopener noreferrer"

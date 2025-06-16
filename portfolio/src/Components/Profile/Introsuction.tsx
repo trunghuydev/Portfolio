@@ -1,38 +1,44 @@
-type PersonalProp = {
-  name: string;
-  title: string;
-  location: string;
-  email: string;
-  gpa?: string;
-  school: string;
-  phone: string;
-};
+import { PersonalInfo } from '@/Interface/TInformation';
 
-export default function Personal({
-  name,
-  title,
+type IntroductionProps = Pick<
+  PersonalInfo,
+  | 'fullname'
+  | 'position_career'
+  | 'email'
+  | 'address'
+  | 'gpa'
+  | 'university_name'
+  | 'phone_number'
+  | 'dob'
+>;
+
+export default function Introduction({
+  fullname,
+  position_career,
   email,
-  location,
+  address,
   gpa,
-  school,
-  phone,
-}: PersonalProp) {
+  dob,
+  university_name,
+  phone_number,
+}: IntroductionProps) {
   return (
     <section className="flex flex-col items-center justify-center min-h-[100vh] px-4 text-center bg-gradient-to-br from-purple-100 via-blue-100 to-cyan-100">
-      <h1 className="mb-6 font-extrabold text-transparent text-7xl sm:text-8xl bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
-        {name}
+      <h1 className="pb-4 mb-5 font-extrabold text-transparent text-7xl sm:text-8xl bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+        {fullname}
       </h1>
-      <p className="mb-10 text-3xl text-gray-700">{title}</p>
+      <p className="mb-10 text-3xl font-extrabold text-gray-700 ">{position_career}</p>
 
       <div className="flex flex-col gap-6 mb-8 text-lg text-gray-600 sm:flex-row">
         <span>{email}</span>
-        <span>{location}</span>
+        <span>{address}</span>
         {gpa && <span>GPA: {gpa}</span>}
       </div>
 
       <div className="flex flex-col gap-6 mb-10 text-lg text-gray-600 sm:flex-row">
-        <span>{school}</span>
-        <span>{phone}</span>
+        <span>{university_name}</span>
+        <span>{phone_number}</span>
+        <span>{dob}</span>
       </div>
 
       <div className="flex gap-6">
