@@ -9,7 +9,7 @@ import Projects from '../Project';
 import Navbar from '@/Components/Header/Header';
 import { useSkills } from '@/Hook/usegetSkills';
 import Skills from '../Skill';
-import { groupSkillsByPosition, Skill, SkillGroup } from '@/Interface/TSkills';
+import { groupSkillsByPosition } from '@/Interface/TSkills';
 
 type ProfileContainerProps = {
   accessToken: string;
