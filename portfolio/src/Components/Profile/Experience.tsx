@@ -14,7 +14,6 @@ const getTextColor = (index: number) => {
 const Experience = ({ items }: { items: WorkExp[] }) => {
   return (
     <div className="w-full bg-[#F9FBFC]">
-      {' '}
       <section className="max-w-5xl px-6 py-24 mx-auto bg-[#F9FBFC]">
         <div className="flex flex-col items-center text-center mb-14">
           <ScrollFloat
@@ -54,6 +53,16 @@ const Experience = ({ items }: { items: WorkExp[] }) => {
 
                 <p className="mb-2 text-lg text-gray-700">{item.company_name}</p>
                 <p className="text-base text-gray-600">{item.description}</p>
+
+                {item.tasks && item.tasks.length > 0 && (
+                  <ul className="mt-4 space-y-1 text-gray-700 list-disc list-inside">
+                    {item.tasks.map((task, taskIdx) => (
+                      <li key={taskIdx} className="text-base">
+                        {task.task_description}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           ))}

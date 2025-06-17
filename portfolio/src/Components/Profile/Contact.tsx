@@ -7,6 +7,7 @@ import {
   FaFacebook,
   FaUser,
   FaUniversity,
+  FaGithub,
 } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
@@ -22,6 +23,7 @@ type ContactProps = Pick<
   | 'linkedin_url'
   | 'facebook_url'
   | 'phone_number'
+  | 'github'
 >;
 
 type ContactItemProps = {
@@ -44,6 +46,7 @@ const Contact: React.FC<ContactProps> = ({
   facebook_url,
   phone_number,
   fullname,
+  github,
 }) => {
   return (
     <section id="contact" className="px-6 py-24 bg-blue-50">
@@ -97,6 +100,11 @@ const Contact: React.FC<ContactProps> = ({
                   aria-label="Facebook"
                 >
                   <FaFacebook className="transition-colors hover:text-purple-600" size={20} />
+                </a>
+              )}
+              {github && (
+                <a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <FaGithub className="transition-colors hover:text-purple-600" size={20} />
                 </a>
               )}
             </div>

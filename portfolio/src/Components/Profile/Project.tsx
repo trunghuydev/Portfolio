@@ -1,6 +1,7 @@
 import { Project } from '@/Interface/TProject';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { FaGithub, FaPlayCircle } from 'react-icons/fa';
 import 'swiper/swiper-bundle.css';
 
 const Projects = ({ projects }: { projects: Project[] }) => {
@@ -24,7 +25,7 @@ const Projects = ({ projects }: { projects: Project[] }) => {
         >
           {projects.map((project, idx) => (
             <SwiperSlide key={idx}>
-              <div className="h-[550px] max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+              <div className="h-[550px] max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
                 <div className="grid h-full grid-cols-1 md:grid-cols-2">
                   {/* Ảnh */}
                   {project.img_url ? (
@@ -60,14 +61,15 @@ const Projects = ({ projects }: { projects: Project[] }) => {
                       </div>
                     )}
 
-                    <div className="flex gap-6 text-base font-medium">
+                    <div className="flex flex-wrap gap-4 mt-4">
                       {project.url_github && (
                         <a
                           href={project.url_github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-purple-600 hover:underline"
+                          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-purple-600 transition-transform duration-300 border-2 border-purple-600 rounded-lg hover:scale-105 hover:bg-purple-50"
                         >
+                          <FaGithub size={18} />
                           Code
                         </a>
                       )}
@@ -76,8 +78,9 @@ const Projects = ({ projects }: { projects: Project[] }) => {
                           href={project.url_demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline"
+                          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-blue-600 transition-transform duration-300 border-2 border-blue-600 rounded-lg hover:scale-105 hover:bg-blue-50"
                         >
+                          <FaPlayCircle size={18} />
                           Live Demo
                         </a>
                       )}
