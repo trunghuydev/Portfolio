@@ -1,8 +1,8 @@
-// Login/Hook/useAutoLogin.ts
+
 import { useEffect } from 'react';
 import { useLogin } from './useLogin';
 
-const AUTO_LOGIN_INTERVAL_MS = 14 * 60 * 1000;
+const AUTO_LOGIN_INTERVAL_MS = 1* 60 * 1000;
 
 export const useAutoLogin = (username: string, password: string) => {
   const loginMutation = useLogin();

@@ -1,6 +1,6 @@
 // src/api/docApi.ts
 import { Login, LoginResponse } from '@/Interface/auth';
-import { PersonalInfo } from '@/Interface/TInformation';
+import { PersonalInfo, UpdateProfileRs } from '@/Interface/TInformation';
 import { ProjectResponse } from '@/Interface/TProject';
 import { Skill } from '@/Interface/TSkills';
 import {  WorkExpResponse } from '@/Interface/TWorkExp';
@@ -37,6 +37,11 @@ getSkills:async():Promise<Skill[]>=>{
   const res = await axiosInstance.get(url)
   return res.data
 },
-
+  /*--------------------------------------ADmin---------------------------------------------------------------- */
+editProfile:async(data:PersonalInfo):Promise<UpdateProfileRs>=>{
+  const url =`/profile/${data.user_id}`
+  const res = await  axiosInstance.patch(url,data);
+  return res.data
+}
 
 });

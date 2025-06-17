@@ -7,7 +7,7 @@ const Footer = () => {
 
   useEffect(() => {
     if (clicks >= 5) {
-      navigate('/edit');
+      navigate('/a-dmin/edit-profile');
     }
 
     const timer = setTimeout(() => setClicks(0), 1500);

@@ -1,4 +1,4 @@
-// pages/Portfolio.tsx
+// pages/PortfolioHan.tsx
 import React from 'react';
 
 import Footer from '@/Components/Footer/Footer';
@@ -7,8 +7,8 @@ import { useAutoLogin } from '../Login/Hook/useAutoLogin';
 import { useAuthStore } from '@/Store/auth';
 import ProfileContainer from '@/Components/Profile/hook/ProfileContainer';
 
-const Portfolio: React.FC = () => {
-  const username = 'trunghuy';
+const PortfolioHan: React.FC = () => {
+  const username = 'tuonghan';
   const password = '123456789';
 
   useAutoLogin(username, password);
@@ -27,4 +27,4 @@ const Portfolio: React.FC = () => {
   );
 };
 
-export default Portfolio;
+export default PortfolioHan;

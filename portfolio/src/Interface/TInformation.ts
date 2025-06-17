@@ -16,3 +16,8 @@ export type PersonalInfo = {
   background: string | null;
   facebook_url: string | null;
 };
+
+
+export type UpdateProfileRs ={
+  message:string
+}
