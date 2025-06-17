@@ -1,6 +1,6 @@
 
 import { Login, LoginResponse } from '@/Interface/auth';
-import { PersonalInfo } from '@/Interface/TPersonalInfo';
+import { PersonalInfo, UpdateProfileRs } from '@/Interface/TPersonalInfo';
 
 import { ProjectResponse } from '@/Interface/TProject';
 import { Skill } from '@/Interface/TSkills';
