@@ -2,6 +2,7 @@
 import { Login, LoginResponse } from '@/Interface/auth';
 import { PersonalInfo } from '@/Interface/TInformation';
 import { ProjectResponse } from '@/Interface/TProject';
+import { Skill } from '@/Interface/TSkills';
 import {  WorkExpResponse } from '@/Interface/TWorkExp';
 import { AxiosInstance } from 'axios';
 
@@ -30,6 +31,11 @@ getProject:async(pageIndex=1,pageSize=1):Promise<ProjectResponse>=>{
   const res= await axiosInstance.get(url);
   return res.data;
 
+},
+getSkills:async():Promise<Skill[]>=>{
+  const url =`/skill`
+  const res = await axiosInstance.get(url)
+  return res.data
 },
 
 

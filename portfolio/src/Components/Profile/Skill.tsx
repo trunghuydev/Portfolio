@@ -1,10 +1,5 @@
+import { SkillGroup } from '@/Interface/TSkills';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
-
-export type SkillGroup = {
-  category: string;
-  color: string;
-  skills: string[];
-};
 
 const Skills = ({ skillGroups }: { skillGroups: SkillGroup[] }) => {
   return (
@@ -27,10 +22,10 @@ const Skills = ({ skillGroups }: { skillGroups: SkillGroup[] }) => {
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {skillGroups.map((group, idx) => (
           <div key={idx}>
-            <h3 className={`mb-4 text-2xl font-semibold ${group.color}`}>{group.category}</h3>
+            <h3 className={`mb-4 text-2xl font-semibold ${group.color}`}>{group.position}</h3>
             <ul className="space-y-2 text-base text-gray-700 list-disc list-inside">
-              {group.skills.map((skill, i) => (
-                <li key={i}>{skill}</li>
+              {group.skills.map((skill) => (
+                <li key={skill.skill_id}>{skill.skill_name}</li>
               ))}
             </ul>
           </div>

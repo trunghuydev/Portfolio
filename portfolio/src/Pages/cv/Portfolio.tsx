@@ -8,7 +8,7 @@ import { useAuthStore } from '@/Store/auth';
 import ProfileContainer from '@/Components/Profile/hook/ProfileContainer';
 
 const Portfolio: React.FC = () => {
-  const username = 'trungthanh';
+  const username = 'trunghuy';
   const password = '123456789';
 
   useAutoLogin(username, password);

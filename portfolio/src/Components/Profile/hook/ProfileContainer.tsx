@@ -7,6 +7,9 @@ import About from '../About';
 import Experience from '../Experience';
 import Projects from '../Project';
 import Navbar from '@/Components/Header/Header';
+import { useSkills } from '@/Hook/usegetSkills';
+import Skills from '../Skill';
+import { groupSkillsByPosition, Skill, SkillGroup } from '@/Interface/TSkills';
 
 type ProfileContainerProps = {
   accessToken: string;
@@ -33,10 +36,21 @@ const ProfileContainer = ({ accessToken }: ProfileContainerProps) => {
     isLoading: isProjectLoading,
     isError: isProjectError,
   } = useProject(accessToken, pageIndex, pageSize);
+  const { data: skills, isLoading: isSkillloading, isError: isskillError } = useSkills(accessToken);
 
   if (!accessToken) return <p>Chưa đăng nhập.</p>;
-  if (isProfileLoading || isWorkExpLoading || isProjectLoading) return <p>Đang tải dữ liệu...</p>;
-  if (isProfileError || isWorkExpError || isProjectError || !profile || !workExp || !projectData)
+  if (isProfileLoading || isWorkExpLoading || isProjectLoading || isSkillloading)
+    return <p>Đang tải dữ liệu...</p>;
+  if (
+    isProfileError ||
+    isWorkExpError ||
+    isProjectError ||
+    isskillError ||
+    !skills ||
+    !profile ||
+    !workExp ||
+    !projectData
+  )
     return <p>Lỗi khi tải dữ liệu.</p>;
 
   return (
@@ -57,6 +71,9 @@ const ProfileContainer = ({ accessToken }: ProfileContainerProps) => {
 
       <section id="projects">
         <Projects projects={projectData.data ?? []} />
+      </section>
+      <section id="skills">
+        <Skills skillGroups={groupSkillsByPosition(skills)} />
       </section>
     </>
   );
