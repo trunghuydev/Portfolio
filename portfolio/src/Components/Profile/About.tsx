@@ -1,4 +1,4 @@
-import { PersonalInfo } from '@/Interface/TInformation';
+import { PersonalInfo } from '@/Interface/TPersonalInfo';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
 
 type AboutProps = Pick<PersonalInfo, 'avatar' | 'background' | 'mindset' | 'position_career'>;

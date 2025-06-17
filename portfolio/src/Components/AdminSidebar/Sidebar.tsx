@@ -1,4 +1,3 @@
-// Components/Sidebar.tsx
 import { NavLink } from 'react-router-dom';
 
 const menu = [
@@ -6,7 +5,6 @@ const menu = [
   { path: '/a-dmin/experience', label: 'Experience' },
   { path: '/a-dmin/project', label: 'Project' },
   { path: '/a-dmin/skills', label: 'Skills' },
-  { path: '/a-dmin/contact', label: 'Contact' },
 ];
 
 const Sidebar = () => {

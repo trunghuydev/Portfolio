@@ -23,7 +23,7 @@ export default function LoginPage() {
 
     loginMutation.mutate(payload, {
       onSuccess: () => {
-        navigate('/');
+        navigate('/trung-huy');
       },
       onError: () => {
         setError('Sai tên đăng nhập hoặc mật khẩu');

@@ -10,6 +10,7 @@ import Navbar from '@/Components/Header/Header';
 import { useSkills } from '@/Hook/usegetSkills';
 import Skills from '../Skill';
 import { groupSkillsByPosition } from '@/Interface/TSkills';
+import Contact from '../Contact';
 
 type ProfileContainerProps = {
   accessToken: string;
@@ -68,12 +69,16 @@ const ProfileContainer = ({ accessToken }: ProfileContainerProps) => {
       <section id="experience">
         <Experience items={workExp.data ?? []} />
       </section>
+      <section id="skills">
+        <Skills skillGroups={groupSkillsByPosition(skills)} />
+      </section>
 
       <section id="projects">
         <Projects projects={projectData.data ?? []} />
       </section>
-      <section id="skills">
-        <Skills skillGroups={groupSkillsByPosition(skills)} />
+
+      <section id="contact">
+        <Contact {...profile} />
       </section>
     </>
   );

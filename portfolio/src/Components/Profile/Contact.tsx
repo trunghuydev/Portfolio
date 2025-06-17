@@ -1,38 +1,50 @@
 import React from 'react';
 import {
   FaEnvelope,
-  FaPhone,
   FaMapMarkerAlt,
+  FaPhone,
   FaLinkedin,
-  FaGithub,
-  FaTwitter,
-  FaInstagram,
+  FaFacebook,
+  FaUser,
+  FaUniversity,
 } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
+import { PersonalInfo } from '@/Interface/TPersonalInfo';
+
+type ContactProps = Pick<
+  PersonalInfo,
+  | 'fullname'
+  | 'address'
+  | 'university_name'
+  | 'email'
+  | 'avatar'
+  | 'linkedin_url'
+  | 'facebook_url'
+  | 'phone_number'
+>;
 
 type ContactItemProps = {
   Icon: IconType;
   text: string;
 };
 
-const ContactItem: React.FC<ContactItemProps> = ({ Icon, text }) => {
-  return (
-    <div className="flex items-center gap-3 text-base">
-      <Icon className="text-purple-600" size={20} />
-      <span>{text}</span>
-    </div>
-  );
-};
+const ContactItem: React.FC<ContactItemProps> = ({ Icon, text }) => (
+  <div className="flex items-center gap-3 text-base">
+    <Icon className="text-purple-600" size={20} />
+    <span>{text}</span>
+  </div>
+);
 
-const Contact: React.FC = () => {
-  const socialIcons = [
-    { icon: FaLinkedin, label: 'LinkedIn' },
-    { icon: FaGithub, label: 'GitHub' },
-    { icon: FaTwitter, label: 'Twitter' },
-    { icon: FaInstagram, label: 'Instagram' },
-  ];
-
+const Contact: React.FC<ContactProps> = ({
+  address,
+  university_name,
+  email,
+  linkedin_url,
+  facebook_url,
+  phone_number,
+  fullname,
+}) => {
   return (
     <section id="contact" className="px-6 py-24 bg-blue-50">
       <div className="flex flex-col items-center text-center mb-14">
@@ -56,20 +68,37 @@ const Contact: React.FC = () => {
           <div>
             <h3 className="mb-4 text-xl font-semibold text-gray-800">Get In Touch</h3>
             <div className="space-y-4 text-gray-600">
-              <ContactItem Icon={FaEnvelope} text="alex.chen@email.com" />
-              <ContactItem Icon={FaPhone} text="+1 (555) 123-4567" />
-              <ContactItem Icon={FaMapMarkerAlt} text="San Francisco, CA" />
+              {fullname && <ContactItem Icon={FaUser} text={fullname} />}
+              {phone_number && <ContactItem Icon={FaPhone} text={phone_number} />}
+              {email && <ContactItem Icon={FaEnvelope} text={email} />}
+              {address && <ContactItem Icon={FaMapMarkerAlt} text={address} />}
+              {university_name && <ContactItem Icon={FaUniversity} text={university_name} />}
             </div>
           </div>
 
           <div>
             <h4 className="mb-2 text-lg font-semibold text-gray-800">Follow Me</h4>
             <div className="flex gap-4 text-xl text-gray-600">
-              {socialIcons.map(({ icon: Icon, label }) => (
-                <a href="#" aria-label={label} key={label}>
-                  <Icon className="transition-colors hover:text-purple-600" size={20} />
+              {linkedin_url && (
+                <a
+                  href={linkedin_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin className="transition-colors hover:text-purple-600" size={20} />
                 </a>
-              ))}
+              )}
+              {facebook_url && (
+                <a
+                  href={facebook_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                >
+                  <FaFacebook className="transition-colors hover:text-purple-600" size={20} />
+                </a>
+              )}
             </div>
           </div>
         </div>

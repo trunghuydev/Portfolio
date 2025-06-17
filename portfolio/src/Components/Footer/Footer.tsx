@@ -15,7 +15,7 @@ const Footer = () => {
   }, [clicks, navigate]);
 
   return (
-    <footer className="py-6 mt-12 text-sm text-center text-gray-500 border-t">
+    <footer className="py-6 mt-1 text-sm text-center text-gray-500 border-t">
       <span onClick={() => setClicks((prev) => prev + 1)} className="select-none">
         © 2025 Built with React
       </span>
