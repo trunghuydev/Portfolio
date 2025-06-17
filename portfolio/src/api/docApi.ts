@@ -1,6 +1,7 @@
-// src/api/docApi.ts
+
 import { Login, LoginResponse } from '@/Interface/auth';
-import { PersonalInfo, UpdateProfileRs } from '@/Interface/TInformation';
+import { PersonalInfo } from '@/Interface/TPersonalInfo';
+
 import { ProjectResponse } from '@/Interface/TProject';
 import { Skill } from '@/Interface/TSkills';
 import {  WorkExpResponse } from '@/Interface/TWorkExp';
