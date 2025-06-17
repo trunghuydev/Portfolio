@@ -15,6 +15,8 @@ export type Project= {
   duration: string;
   from: string;
   to: string;
+  url_contract?:string;
+  url_excel?:string;
   teches: Tech[];
 }
 

@@ -2,6 +2,7 @@ import { Project } from '@/Interface/TProject';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { FaGithub, FaPlayCircle } from 'react-icons/fa';
+import { FaFileContract, FaFileExcel } from 'react-icons/fa6';
 import 'swiper/swiper-bundle.css';
 
 const Projects = ({ projects }: { projects: Project[] }) => {
@@ -27,7 +28,6 @@ const Projects = ({ projects }: { projects: Project[] }) => {
             <SwiperSlide key={idx}>
               <div className="h-[550px] max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
                 <div className="grid h-full grid-cols-1 md:grid-cols-2">
-                  {/* Ảnh */}
                   {project.img_url ? (
                     <div className="flex items-center justify-center p-4">
                       <img
@@ -40,7 +40,6 @@ const Projects = ({ projects }: { projects: Project[] }) => {
                     <div className="flex items-center justify-center bg-gray-100">No Image</div>
                   )}
 
-                  {/* Nội dung */}
                   <div className="p-6 overflow-y-auto">
                     <h3 className="mb-1 text-2xl font-bold text-gray-800">
                       {project.project_name}
@@ -82,6 +81,28 @@ const Projects = ({ projects }: { projects: Project[] }) => {
                         >
                           <FaPlayCircle size={18} />
                           Live Demo
+                        </a>
+                      )}
+                      {project.url_contract && (
+                        <a
+                          href={project.url_contract}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-green-600 transition-transform duration-300 border-2 border-green-600 rounded-lg hover:scale-105 hover:bg-green-50"
+                        >
+                          <FaFileContract size={18} />
+                          Contract
+                        </a>
+                      )}
+                      {project.url_excel && (
+                        <a
+                          href={project.url_excel}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-transform duration-300 border-2 rounded-lg text-emerald-600 border-emerald-600 hover:scale-105 hover:bg-emerald-50"
+                        >
+                          <FaFileExcel size={18} />
+                          Excel
                         </a>
                       )}
                     </div>
