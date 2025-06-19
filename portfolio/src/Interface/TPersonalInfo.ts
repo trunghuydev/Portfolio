@@ -7,7 +7,7 @@ export type PersonalInfo = {
   github: string;
   dob: string;
   avatar: string;
-  gpa: number | null;
+  gpa: number ;
   email: string;
   workExpOfYear: number | null;
   linkedin_url: string | null;

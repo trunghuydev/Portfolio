@@ -66,7 +66,6 @@ const Contact: React.FC<ContactProps> = ({
       </div>
 
       <div className="grid max-w-6xl grid-cols-1 gap-10 mx-auto md:grid-cols-2">
-        {/* LEFT SIDE */}
         <div className="space-y-8">
           <div>
             <h3 className="mb-4 text-xl font-semibold text-gray-800">Get In Touch</h3>
@@ -111,7 +110,6 @@ const Contact: React.FC<ContactProps> = ({
           </div>
         </div>
 
-        {/* RIGHT SIDE - FORM */}
         <form className="w-full space-y-4">
           <input
             className="w-full p-4 border border-gray-300 rounded-lg"
@@ -125,7 +123,7 @@ const Contact: React.FC<ContactProps> = ({
           />
           <textarea
             className="w-full p-4 border border-gray-300 rounded-lg"
-            placeholder="Tell me about your project..."
+            placeholder="Send message..."
             rows={4}
           ></textarea>
           <button

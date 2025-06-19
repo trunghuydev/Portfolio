@@ -4,15 +4,25 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { FaGithub, FaPlayCircle } from 'react-icons/fa';
 import { FaFileContract, FaFileExcel } from 'react-icons/fa6';
 import 'swiper/swiper-bundle.css';
+import ScrollFloat from '@/Util/Animation/scrollFloat';
 
 const Projects = ({ projects }: { projects: Project[] }) => {
   return (
     <section id="projects" className="w-full bg-[#F9FBFC] py-20">
       <div className="px-6 mx-auto max-w-7xl">
         <div className="text-center mb-14">
-          <h2 className="mb-4 text-4xl font-extrabold text-purple-600 md:text-5xl">
-            Featured Projects
-          </h2>
+          <ScrollFloat
+            animationDuration={1.2}
+            ease="back.out(1.7)"
+            scrollStart="top 80%"
+            scrollEnd="bottom 60%"
+            stagger={0.03}
+          >
+            <h2 className="mb-4 text-5xl font-extrabold text-center text-purple-600">
+              Featured Projects
+            </h2>
+          </ScrollFloat>
+
           <p className="text-lg text-gray-500">A collection of my recent work</p>
         </div>
 

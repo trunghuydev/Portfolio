@@ -1,11 +1,12 @@
 import { PersonalInfo } from '@/Interface/TPersonalInfo';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
+import Wave from './waave';
 
 type AboutProps = Pick<PersonalInfo, 'avatar' | 'background' | 'mindset' | 'position_career'>;
 
 const About = ({ background, mindset, avatar, position_career }: AboutProps) => {
   return (
-    <section className="px-6 py-20 text-gray-700 bg-white">
+    <section className="relative px-6 pt-20 pb-32 text-gray-700 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center text-center mb-14">
           <ScrollFloat
@@ -34,6 +35,7 @@ const About = ({ background, mindset, avatar, position_career }: AboutProps) => 
           </div>
         </div>
       </div>
+      <Wave fill="#F9FBFC" flip />
     </section>
   );
 };

@@ -1,5 +1,6 @@
 import { WorkExp } from '@/Interface/TWorkExp';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
+import Wave from './waave';
 
 const getDotColor = (index: number) => {
   const colors = ['bg-blue-500', 'bg-purple-500', 'bg-cyan-400'];
@@ -13,8 +14,8 @@ const getTextColor = (index: number) => {
 
 const Experience = ({ items }: { items: WorkExp[] }) => {
   return (
-    <div className="w-full bg-[#F9FBFC]">
-      <section className="max-w-5xl px-6 py-24 mx-auto bg-[#F9FBFC]">
+    <div className="w-full bg-[#F9FBFC] relative overflow-hidden">
+      <section className="max-w-5xl px-6 pt-24 pb-32 mx-auto">
         <div className="flex flex-col items-center text-center mb-14">
           <ScrollFloat
             animationDuration={1.2}
@@ -41,8 +42,8 @@ const Experience = ({ items }: { items: WorkExp[] }) => {
 
               <div className="bg-white shadow-md rounded-2xl p-8 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-[1.02]">
                 <div className="mb-2 space-y-1">
-                  <h3 className="text-2xl font-semibold text-gray-900">{item.project_id}</h3>
-
+                  <h3 className="mb-2 text-2xl text-gray-900">{item.company_name}</h3>
+                  <p className="text-lg font-semibold text-gray-700">{item.project_id}</p>
                   <div className="flex items-center justify-between">
                     <h4 className="text-xl font-medium text-gray-800">{item.position}</h4>
                     <span className={`text-sm font-bold ${getTextColor(idx)}`}>
@@ -51,7 +52,6 @@ const Experience = ({ items }: { items: WorkExp[] }) => {
                   </div>
                 </div>
 
-                <p className="mb-2 text-lg text-gray-700">{item.company_name}</p>
                 <p className="text-base text-gray-600">{item.description}</p>
 
                 {item.tasks && item.tasks.length > 0 && (
@@ -68,6 +68,10 @@ const Experience = ({ items }: { items: WorkExp[] }) => {
           ))}
         </div>
       </section>
+
+      <div className="absolute bottom-0 left-0 w-full">
+        <Wave fill="#ffffff" flip />
+      </div>
     </div>
   );
 };
