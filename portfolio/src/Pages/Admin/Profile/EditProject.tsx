@@ -55,8 +55,14 @@ const AdminEditProjects = () => {
           .map((t) => t.trim())
           .filter(Boolean);
         formData.append('teches', JSON.stringify(teches.map((tech) => ({ tech_name: tech }))));
+      } else if (
+        typeof value === 'string' ||
+        typeof value === 'number' ||
+        typeof value === 'boolean'
+      ) {
+        formData.append(key, String(value));
       } else {
-        formData.append(key, value ?? '');
+        formData.append(key, '');
       }
     });
 
