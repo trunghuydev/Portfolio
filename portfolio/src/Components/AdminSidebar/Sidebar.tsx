@@ -2,9 +2,9 @@ import { NavLink } from 'react-router-dom';
 
 const menu = [
   { path: '/a-dmin/edit-profile', label: 'Profile' },
-  { path: '/a-dmin/experience', label: 'Experience' },
-  { path: '/a-dmin/project', label: 'Project' },
-  { path: '/a-dmin/skills', label: 'Skills' },
+  { path: '/a-dmin/edit-workexp', label: 'Experience' },
+  { path: '/a-dmin/edit-project', label: 'Project' },
+  { path: '/a-dmin/edit-skill', label: 'Skills' },
 ];
 
 const Sidebar = () => {

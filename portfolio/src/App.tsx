@@ -11,6 +11,8 @@ import PortfolioThanh from './Pages/Thanh/Portfolio';
 import PortfolioPhong from './Pages/Phong/Portfolio';
 import PortfolioNam from './Pages/H_Nam/Portfolio';
 import PortfolioThy from './Pages/Thy/Portfolio';
+import AdminEditWorkexp from './Pages/Admin/Profile/EditWorkexp';
+import AdminEditProject from './Pages/Admin/Profile/EditProject';
 
 function App() {
   return (
@@ -28,6 +30,9 @@ function App() {
 
           <Route path="/a-dmin" element={<AdminLayout />}>
             <Route path="edit-profile" element={<AdminEditProfile />} />
+            <Route path="edit-workexp" element={<AdminEditWorkexp />} />
+            <Route path="edit-project" element={<AdminEditProject />} />
+            <Route path="edit-skill" element={<AdminEditWorkexp />} />
           </Route>
         </Routes>
       </Router>

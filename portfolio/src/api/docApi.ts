@@ -2,9 +2,9 @@
 import { Login, LoginResponse } from '@/Interface/auth';
 import { PersonalInfo, UpdateProfileRs } from '@/Interface/TPersonalInfo';
 
-import { ProjectResponse } from '@/Interface/TProject';
+import { ProjectResponse, ProjectUpdateResponse } from '@/Interface/TProject';
 import { Skill } from '@/Interface/TSkills';
-import {  WorkExpResponse } from '@/Interface/TWorkExp';
+import {  WorkExperiencePayload, WorkExperienceUpdateRs, WorkExpResponse } from '@/Interface/TWorkExp';
 import { AxiosInstance } from 'axios';
 
 export const docApi = (axiosInstance: AxiosInstance) => ({
@@ -21,7 +21,7 @@ export const docApi = (axiosInstance: AxiosInstance) => ({
   },
 
 
-getWorkexp: async (pageIndex = 1, pageSize = 1): Promise<WorkExpResponse> => {
+getWorkexp: async (pageIndex = 1, pageSize = 10): Promise<WorkExpResponse> => {
   const url = `/workexp?page_index=${pageIndex}&page_size=${pageSize}`;
   const res = await axiosInstance.get(url);
   return res.data;
@@ -39,10 +39,46 @@ getSkills:async():Promise<Skill[]>=>{
   return res.data
 },
   /*--------------------------------------ADmin---------------------------------------------------------------- */
-editProfile:async(data:PersonalInfo):Promise<UpdateProfileRs>=>{
-  const url =`/profile/${data.user_id}`
-  const res = await  axiosInstance.patch(url,data);
-  return res.data
-}
+editProfile: async (formData: FormData): Promise<UpdateProfileRs> => {
+  const user_id = formData.get('user_id');
+  const url = `/profile/${user_id}`;
+  const res = await axiosInstance.patch(url, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return res.data;
+},
+ updateWorkExperience: async (we_id: string, payload: WorkExperiencePayload):Promise<WorkExperienceUpdateRs> => {
+    const res = await axiosInstance.patch(`/workexp/${we_id}`, payload);
+    return res.data;
+  },
+
+  deleteWorkExperience: async (we_id: string):Promise<WorkExperienceUpdateRs> => {
+    const res = await axiosInstance.delete(`/workexp/${we_id}`);
+    return res.data;
+  },
+  createExperience:async(payloadWork:WorkExperiencePayload):Promise<WorkExperienceUpdateRs>=>{
+      const res = await axiosInstance.post(`/api/v1/workexp`, payloadWork);
+      return res.data;
+  },
+   updateProject: async (
+    project_id: string,
+    formData: FormData
+  ): Promise<ProjectUpdateResponse> => {
+    const url = `/project/${project_id}`;
+    const res = await axiosInstance.patch(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return res.data;
+  },
+   deleteProject: async (project_id: string): Promise<ProjectUpdateResponse> => {
+    const url = `/project/${project_id}`;
+    const res = await axiosInstance.delete(url);
+    return res.data;
+  },
+ 
 
 });

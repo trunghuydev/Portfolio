@@ -18,3 +18,18 @@ export type WorkExpResponse = {
   total_item: number;
   data: WorkExp[];
 };
+
+export type WorkExperiencePayload = {
+  project_id: string;
+  description: string;
+  company_name: string;
+  duration: string;
+  position: string;
+};
+
+
+
+export type WorkExperienceUpdateRs ={
+  stCode:number;
+  message:string
+}

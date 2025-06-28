@@ -24,3 +24,8 @@ export type ProjectResponse ={
   total_item: number;
   data: Project[];
 }
+
+export type ProjectUpdateResponse={
+  stcode:string;
+  message:string
+}
