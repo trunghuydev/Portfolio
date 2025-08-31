@@ -17,20 +17,18 @@ export const useLogin = (): UseMutationResult<LoginResponse, Error, Login> => {
     },
 
     onSuccess: (data) => {
-      const { token, user_name, user_id } = data;
+      const { token, user_name, user_id,email } = data;
       const { accessToken, refreshToken } = token;
 
       if (accessToken && refreshToken && user_name) {
-        console.log('Đăng nhập thành công:', user_name);
-        setTokens(accessToken, refreshToken, user_name);
+        // console.log('Đăng nhập thành công:', user_name);
+        setTokens(accessToken, refreshToken, user_name,email);
         setuserId(user_id);
       } else {
-        console.warn('Thiếu thông tin đăng nhập từ server.');
+        // console.warn('Thiếu thông tin đăng nhập từ server.');
       }
     },
 
-    onError: (error) => {
-      console.error('Đăng nhập thất bại:', error.message);
-    },
+   
   });
 };

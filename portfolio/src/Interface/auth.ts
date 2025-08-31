@@ -14,5 +14,6 @@ export interface LoginResponse{
     };
     user_name:string;
     user_id:string;
+    email:string;
 }
 
