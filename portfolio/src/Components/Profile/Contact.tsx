@@ -12,7 +12,7 @@ import {
 import type { IconType } from 'react-icons';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
 import { PersonalInfo } from '@/Interface/TPersonalInfo';
-import { useAuthStore } from '@/Store/auth';
+// import { useAuthStore } from '@/Store/auth';
 
 type ContactProps = Pick<
   PersonalInfo,
@@ -49,7 +49,7 @@ const Contact: React.FC<ContactProps> = ({
   fullname,
   github,
 }) => {
-  const contactEmail = useAuthStore((s) => s.email);
+  // const contactEmail = useAuthStore((s) => s.email);
   return (
     <section id="contact" className="px-6 py-24 bg-blue-50">
       <div className="flex flex-col items-center text-center mb-14">

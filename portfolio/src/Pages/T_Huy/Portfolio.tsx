@@ -1,4 +1,3 @@
-// pages/PortfolioHuy.tsx
 import React from 'react';
 
 import Footer from '@/Components/Footer/Footer';
