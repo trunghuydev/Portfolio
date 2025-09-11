@@ -1,4 +1,4 @@
-// src/api/createAxiosClient.ts
+
 import axios from 'axios';
 
 export const createAxiosClient = (accessToken: string) => {

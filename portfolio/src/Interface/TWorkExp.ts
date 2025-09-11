@@ -1,5 +1,5 @@
 export type WorkExpTask = {
-  mt_id: string;
+  myTask_id?: string;
   task_description: string;
 };
 

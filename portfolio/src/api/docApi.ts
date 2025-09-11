@@ -4,7 +4,7 @@ import { PersonalInfo, UpdateProfileRs } from '@/Interface/TPersonalInfo';
 
 import { ProjectResponse, ProjectUpdateResponse } from '@/Interface/TProject';
 import { Skill } from '@/Interface/TSkills';
-import {  WorkExperiencePayload, WorkExperienceUpdateRs, WorkExpResponse } from '@/Interface/TWorkExp';
+import {  WorkExperiencePayload, WorkExperienceUpdateRs, WorkExpResponse, WorkExpTask } from '@/Interface/TWorkExp';
 import { AxiosInstance } from 'axios';
 
 export const docApi = (axiosInstance: AxiosInstance) => ({
@@ -80,5 +80,11 @@ editProfile: async (formData: FormData): Promise<UpdateProfileRs> => {
     return res.data;
   },
  
+  createMyTask: async(body:WorkExpTask,we_id:string): Promise<WorkExperienceUpdateRs>=>{
+    const url =`/mytask/${we_id}`;
+    const res = await axiosInstance.post(url,body)
+    return res.data
+  },
+
 
 });
