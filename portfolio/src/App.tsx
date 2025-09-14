@@ -11,8 +11,9 @@ import PortfolioThanh from './Pages/Thanh/Portfolio';
 import PortfolioPhong from './Pages/Phong/Portfolio';
 import PortfolioNam from './Pages/H_Nam/Portfolio';
 import PortfolioThy from './Pages/Thy/Portfolio';
-import AdminEditWorkexp from './Pages/Admin/Profile/EditWorkexp';
+
 import AdminEditProject from './Pages/Admin/Profile/EditProject';
+import AdminEditWorkexp from './Pages/Admin/Profile/Workexperience/AdminEditWorkexp';
 
 function App() {
   return (

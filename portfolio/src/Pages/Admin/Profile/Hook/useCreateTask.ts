@@ -1,13 +1,15 @@
+
 import { createAxiosClient } from "@/api/axiosClient";
 import { docApi } from "@/api/docApi";
-import { WorkExpTask } from "@/Interface/TWorkExp";
 import { useMutation } from "@tanstack/react-query";
+import type { WorkExperienceUpdateRs, WorkExpTaskCreate } from "@/Interface/TWorkExp";
 
-type Variables = { we_id: string; body: WorkExpTask; };
+type CreateVars = { we_id: string; body: WorkExpTaskCreate };
+
 export const useCreateTask = (accessToken: string) => {
   const api = docApi(createAxiosClient(accessToken));
-  
-  return useMutation({
-      mutationFn: ({ we_id, body }: Variables) => api.createMyTask(body, we_id)
+
+  return useMutation<WorkExperienceUpdateRs, unknown, CreateVars>({
+    mutationFn: ({ we_id, body }) => api.createMyTask(body, we_id),
   });
-}; 
+};
