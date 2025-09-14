@@ -4,7 +4,7 @@ import { PersonalInfo, UpdateProfileRs } from '@/Interface/TPersonalInfo';
 
 import { ProjectResponse, ProjectUpdateResponse } from '@/Interface/TProject';
 import { Skill } from '@/Interface/TSkills';
-import {  WorkExperiencePayload, WorkExperienceUpdateRs, WorkExpResponse, WorkExpTask, WorkExpTaskCreate, WorkExpTaskUpdateBody } from '@/Interface/TWorkExp';
+import {  WorkExperiencePayload, WorkExperienceUpdateRs, WorkExpResponse, WorkExpTaskCreate, WorkExpTaskUpdateBody } from '@/Interface/TWorkExp';
 import { AxiosInstance } from 'axios';
 
 export const docApi = (axiosInstance: AxiosInstance) => ({
