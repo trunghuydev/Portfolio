@@ -3,7 +3,7 @@ import { docApi } from '@/api/docApi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { message } from 'antd';
 import { QueryKeys } from '@/Constants/query-key';
-import { Skill } from '@/Interface/TSkills';
+
 
 export const useSkillMutations = (accessToken: string) => {
   const api = docApi(createAxiosClient(accessToken));

@@ -12,7 +12,7 @@ import { PersonalInfo, UpdateProfileRs } from '@/Interface/TPersonalInfo';
 
 import { ProjectResponse, ProjectUpdateResponse } from '@/Interface/TProject';
 import { Skill } from '@/Interface/TSkills';
-import {  WorkExperiencePayload, WorkExperienceUpdateRs, WorkExpResponse, WorkExpTaskCreate, WorkExpTaskUpdateBody } from '@/Interface/TWorkExp';
+import {  WorkExperiencePayload, WorkExperienceUpdateRs, WorkExpResponse, WorkExpTaskCreate } from '@/Interface/TWorkExp';
 import { Certificate, CertificateCreatePayload, CertificateUpdatePayload, CertificateResponse } from '@/Interface/TCertificate';
 import { EmailPayload, EmailResponse } from '@/Interface/TEmail';
 import { AxiosInstance } from 'axios';

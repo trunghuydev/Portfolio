@@ -1,15 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Form,
-  Input,
-  Button,
-  Typography,
-  Space,
-  message,
-  Select,
-  Popconfirm,
-  Table,
-} from 'antd';
+import { Form, Input, Button, Typography, Space, message, Popconfirm, Table } from 'antd';
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useAuthStore } from '@/Store/auth';
 import { useSkills } from '@/Hook/usegetSkills';
@@ -125,11 +115,7 @@ const AdminEditSkill = () => {
       key: 'action',
       render: (_: any, record: Skill) => (
         <Space>
-          <Button
-            type="link"
-            icon={<EditOutlined />}
-            onClick={() => handleEdit(record)}
-          >
+          <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}>
             Sửa
           </Button>
           <Popconfirm
@@ -192,7 +178,11 @@ const AdminEditSkill = () => {
 
           <Form.Item>
             <Space>
-              <Button type="primary" htmlType="submit" loading={addSkill.isPending || updateSkill.isPending}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={addSkill.isPending || updateSkill.isPending}
+              >
                 {selectedSkill ? 'Cập nhật' : 'Thêm mới'}
               </Button>
               <Button
@@ -221,4 +211,3 @@ const AdminEditSkill = () => {
 };
 
 export default AdminEditSkill;
-
