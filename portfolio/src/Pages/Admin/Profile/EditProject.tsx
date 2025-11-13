@@ -9,8 +9,9 @@ import {
   message,
   Select,
   Popconfirm,
+  Upload,
 } from 'antd';
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, DeleteOutlined, UploadOutlined } from '@ant-design/icons';
 import { useAuthStore } from '@/Store/auth';
 import { useProject } from '@/Hook/usegetProject';
 import { Project } from '@/Interface/TProject';
@@ -25,62 +26,152 @@ const AdminEditProjects = () => {
   const pageSize = 20;
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [initialValues, setInitialValues] = useState<any>(null);
+
   if (!accessToken) {
     return <div>Vui lòng đăng nhập để chỉnh sửa thông tin cá nhân.</div>;
   }
   const { data: projectData, isLoading, refetch } = useProject(accessToken, pageIndex, pageSize);
 
-  const { updateProject, deleteProject } = useProjectMutations(accessToken);
+  const { createProject, updateProject, deleteProject } = useProjectMutations(accessToken);
 
   useEffect(() => {
     if (selectedProject) {
-      form.setFieldsValue({
+      const initialData = {
         ...selectedProject,
-        teches: selectedProject.teches.map((tech) => tech.tech_name).join(', '),
-      });
+        teches:
+          selectedProject.teches && selectedProject.teches.length > 0
+            ? selectedProject.teches.map((tech) => tech.tech_name).join(', ')
+            : '',
+      };
+      form.setFieldsValue(initialData);
+      setInitialValues(initialData);
+      setImageFile(null);
     } else {
       form.resetFields();
+      setInitialValues(null);
+      setImageFile(null);
     }
-  }, [selectedProject]);
+  }, [selectedProject, form]);
 
   const handleSubmit = (values: any) => {
     if (!accessToken) return;
 
     const formData = new FormData();
 
-    Object.entries(values).forEach(([key, value]) => {
-      if (key === 'teches') {
-        const teches = (value as string)
-          .split(',')
-          .map((t) => t.trim())
-          .filter(Boolean);
-        formData.append('teches', JSON.stringify(teches.map((tech) => ({ tech_name: tech }))));
-      } else if (
-        typeof value === 'string' ||
-        typeof value === 'number' ||
-        typeof value === 'boolean'
-      ) {
-        formData.append(key, String(value));
-      } else {
-        formData.append(key, '');
-      }
-    });
-
     if (selectedProject) {
-      formData.append('project_id', selectedProject.project_id);
+      Object.entries(values).forEach(([key, value]) => {
+        if (key === 'teches') {
+          const currentTechs = (initialValues?.teches || '').trim();
+          const newTechs = ((value as string) || '').trim();
+
+          if (currentTechs !== newTechs) {
+            if (newTechs) {
+              const teches = newTechs
+                .split(',')
+                .map((t: string) => t.trim())
+                .filter(Boolean);
+              if (teches.length > 0) {
+                teches.forEach((tech: string, index: number) => {
+                  formData.append(`tech[${index}].tech_name`, tech);
+                });
+              }
+            }
+          }
+        } else if (key === 'project_id') {
+          return;
+        } else if (key === 'img_url') {
+          return;
+        } else if (
+          typeof value === 'string' ||
+          typeof value === 'number' ||
+          typeof value === 'boolean'
+        ) {
+          const initialValue = initialValues?.[key];
+
+          if (typeof value === 'boolean') {
+            if (value !== initialValue) {
+              formData.append(key, String(value));
+            }
+          } else {
+            const normalizedValue = value === null || value === undefined ? '' : String(value);
+            const normalizedInitial =
+              initialValue === null || initialValue === undefined ? '' : String(initialValue);
+
+            if (normalizedValue !== normalizedInitial && normalizedValue !== '') {
+              formData.append(key, normalizedValue);
+            }
+          }
+        }
+      });
+
+      if (imageFile) {
+        formData.append('img_url', imageFile);
+      }
+
+      const formDataEntries = Array.from(formData.entries());
+      if (formDataEntries.length === 0) {
+        message.warning('Không có thay đổi nào để cập nhật!');
+        return;
+      }
+
+      console.log('FormData contents:');
+      for (const [key, val] of formDataEntries) {
+        console.log(key, val);
+      }
+
       updateProject.mutate(
         { project_id: selectedProject.project_id, formData },
         {
-          onSuccess: (res) => {
-            message.success(res.message || 'Cập nhật dự án thành công!');
+          onSuccess: () => {
             refetch();
             setSelectedProject(null);
             form.resetFields();
+            setInitialValues(null);
+          },
+          onError: (error: any) => {
+            console.error('Update project error details:', error);
+            console.error('Error response data:', error?.response?.data);
           },
         }
       );
     } else {
-      message.warning('Hiện tại chưa hỗ trợ tạo mới từ hook này!');
+      Object.entries(values).forEach(([key, value]) => {
+        if (key === 'teches') {
+          if (value && typeof value === 'string' && value.trim()) {
+            const teches = (value as string)
+              .split(',')
+              .map((t: string) => t.trim())
+              .filter(Boolean);
+            if (teches.length > 0) {
+              teches.forEach((tech: string, index: number) => {
+                formData.append(`tech[${index}].tech_name`, tech);
+              });
+            }
+          }
+        } else if (
+          typeof value === 'string' ||
+          typeof value === 'number' ||
+          typeof value === 'boolean'
+        ) {
+          if (value !== null && value !== undefined && key !== 'img_url') {
+            formData.append(key, String(value));
+          }
+        }
+      });
+
+      if (imageFile) {
+        formData.append('img_url', imageFile);
+      }
+
+      createProject.mutate(formData, {
+        onSuccess: () => {
+          refetch();
+          form.resetFields();
+          setInitialValues(null);
+        },
+      });
     }
   };
 
@@ -176,8 +267,23 @@ const AdminEditProjects = () => {
           <Input />
         </Form.Item>
 
-        <Form.Item label="Hình ảnh (URL)" name="img_url">
-          <Input />
+        <Form.Item label="Hình ảnh">
+          <Upload
+            accept="image/*"
+            showUploadList={false}
+            beforeUpload={(file) => {
+              setImageFile(file);
+              return false;
+            }}
+          >
+            <Button icon={<UploadOutlined />}>Chọn ảnh</Button>
+          </Upload>
+          {imageFile && <span className="ml-2 text-sm text-gray-600">{imageFile.name}</span>}
+          {selectedProject?.img_url && !imageFile && (
+            <div className="mt-2">
+              <img src={selectedProject.img_url} alt="Preview" className="h-20 rounded" />
+            </div>
+          )}
         </Form.Item>
 
         <Form.Item label="Hợp đồng (nếu có)" name="url_contract">
@@ -194,7 +300,11 @@ const AdminEditProjects = () => {
 
         <Form.Item>
           <Space>
-            <Button type="primary" htmlType="submit" loading={updateProject.isPending}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={updateProject.isPending || createProject.isPending}
+            >
               {selectedProject ? 'Cập nhật dự án' : 'Tạo dự án'}
             </Button>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FaEnvelope,
   FaMapMarkerAlt,
@@ -12,7 +12,8 @@ import {
 import type { IconType } from 'react-icons';
 import ScrollFloat from '@/Util/Animation/scrollFloat';
 import { PersonalInfo } from '@/Interface/TPersonalInfo';
-// import { useAuthStore } from '@/Store/auth';
+import { useAuthStore } from '@/Store/auth';
+import { useSendEmail } from '@/Hook/useSendEmail';
 
 type ContactProps = Pick<
   PersonalInfo,
@@ -49,7 +50,41 @@ const Contact: React.FC<ContactProps> = ({
   fullname,
   github,
 }) => {
-  // const contactEmail = useAuthStore((s) => s.email);
+  const accessToken = useAuthStore((state) => state.accessToken);
+  const sendEmailMutation = useSendEmail(accessToken || '');
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    subject: '',
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!accessToken) {
+      alert('Vui lòng đăng nhập để gửi email!');
+      return;
+    }
+
+    if (!formData.name || !formData.email || !formData.message) {
+      alert('Vui lòng điền đầy đủ thông tin!');
+      return;
+    }
+
+    sendEmailMutation.mutate({
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+      subject: formData.subject || 'Contact from Portfolio',
+    }, {
+      onSuccess: () => {
+        setFormData({ name: '', email: '', message: '', subject: '' });
+      },
+    });
+  };
+
   return (
     <section id="contact" className="px-6 py-24 bg-blue-50">
       <div className="flex flex-col items-center text-center mb-14">
@@ -112,27 +147,44 @@ const Contact: React.FC<ContactProps> = ({
           </div>
         </div>
 
-        <form className="w-full space-y-4">
+        <form className="w-full space-y-4" onSubmit={handleSubmit}>
           <input
             className="w-full p-4 border border-gray-300 rounded-lg"
             type="text"
             placeholder="Your Name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
           />
           <input
             className="w-full p-4 border border-gray-300 rounded-lg"
             type="email"
             placeholder="your.email@example.com"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            required
+          />
+          <input
+            className="w-full p-4 border border-gray-300 rounded-lg"
+            type="text"
+            placeholder="Subject (optional)"
+            value={formData.subject}
+            onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
           />
           <textarea
             className="w-full p-4 border border-gray-300 rounded-lg"
             placeholder="Send message..."
             rows={4}
+            value={formData.message}
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            required
           ></textarea>
           <button
             type="submit"
-            className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90"
+            disabled={sendEmailMutation.isPending || !accessToken}
+            className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send Message
+            {sendEmailMutation.isPending ? 'Đang gửi...' : 'Send Message'}
           </button>
         </form>
       </div>

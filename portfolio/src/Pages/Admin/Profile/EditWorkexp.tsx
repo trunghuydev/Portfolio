@@ -66,7 +66,6 @@ const AdminEditWorkexp = () => {
     });
   };
 
-  // Tạo nhiều MyTask theo từng WorkExp (không ảnh hưởng logic cũ)
   const handleCreateTasks = (
     we_id: string,
     values: { dynamicTasks?: { task_description: string }[] }
@@ -94,10 +93,7 @@ const AdminEditWorkexp = () => {
 
       {showCreateForm && (
         <div className="p-4 mb-8 border border-blue-300 rounded">
-          <Form
-            layout="vertical"
-            onFinish={handleCreate} // giữ nguyên logic create WorkExp
-          >
+          <Form layout="vertical" onFinish={handleCreate}>
             <Form.Item
               label="Tên công ty"
               name="company_name"
@@ -118,9 +114,6 @@ const AdminEditWorkexp = () => {
               <Input.TextArea rows={3} />
             </Form.Item>
 
-            {/* Ở form tạo mới mình KHÔNG tự động submit kèm task để không đổi logic hiện có.
-                Bạn có thể bật phần này sau nếu muốn create kèm tasks. */}
-
             <Form.Item>
               <Space>
                 <Button type="primary" htmlType="submit" loading={isCreating}>
@@ -136,13 +129,11 @@ const AdminEditWorkexp = () => {
       {data?.data?.length ? (
         <Collapse accordion>
           {data.data.map((item: any) => {
-            // Lấy danh sách task từ nhiều khả năng tên field khác nhau
             const existingTasks: any[] =
               (item?.myTasks as any[]) ?? (item?.tasks as any[]) ?? (item?.mytask as any[]) ?? [];
 
             return (
               <Panel header={item.company_name} key={item.we_id}>
-                {/* Form UPDATE WorkExp (giữ nguyên logic) */}
                 <Form
                   layout="vertical"
                   initialValues={item}
@@ -195,7 +186,6 @@ const AdminEditWorkexp = () => {
                   </Form.Item>
                 </Form>
 
-                {/* Hiển thị Tasks hiện có (read-only) */}
                 {existingTasks?.length > 0 && (
                   <>
                     <Divider />
@@ -212,7 +202,6 @@ const AdminEditWorkexp = () => {
 
                 <Divider />
 
-                {/* Form CREATE nhiều MyTask cho WorkExp này (mới thêm, độc lập) */}
                 <Form
                   layout="vertical"
                   onFinish={(values) => handleCreateTasks(item.we_id, values)}

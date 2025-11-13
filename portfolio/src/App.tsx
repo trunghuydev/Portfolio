@@ -14,6 +14,8 @@ import PortfolioThy from './Pages/Thy/Portfolio';
 
 import AdminEditProject from './Pages/Admin/Profile/EditProject';
 import AdminEditWorkexp from './Pages/Admin/Profile/Workexperience/AdminEditWorkexp';
+import AdminEditSkill from './Pages/Admin/Profile/EditSkill';
+import AdminEditCertificate from './Pages/Admin/Profile/EditCertificate';
 
 function App() {
   return (
@@ -31,7 +33,8 @@ function App() {
             <Route path="edit-profile" element={<AdminEditProfile />} />
             <Route path="edit-workexp" element={<AdminEditWorkexp />} />
             <Route path="edit-project" element={<AdminEditProject />} />
-            <Route path="edit-skill" element={<AdminEditWorkexp />} />
+            <Route path="edit-skill" element={<AdminEditSkill />} />
+            <Route path="edit-certificate" element={<AdminEditCertificate />} />
           </Route>
         </Routes>
       </Router>

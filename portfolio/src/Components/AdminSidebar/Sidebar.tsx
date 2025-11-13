@@ -5,6 +5,7 @@ const menu = [
   { path: '/a-dmin/edit-workexp', label: 'Experience' },
   { path: '/a-dmin/edit-project', label: 'Project' },
   { path: '/a-dmin/edit-skill', label: 'Skills' },
+  { path: '/a-dmin/edit-certificate', label: 'Certificates' },
 ];
 
 const Sidebar = () => {
