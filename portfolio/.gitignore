@@ -22,23 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test coverage
+coverage
+.nyc_output
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Environment variables
 .env
-# Windows system files
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Windows executable or debug
-*.exe
-*.dll
-*.bat
-*.cmd
-
-# Git conflicts backup
-*.orig
-
-# Mac system file (nếu ai đó dùng mac)
-.AppleDouble
-.LSOverride
-
-
+.env.local
+.env.production.local
+.env.development.local

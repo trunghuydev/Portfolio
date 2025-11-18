@@ -29,7 +29,7 @@ const LandingPage: React.FC = () => {
   const userName = useAuthStore((state) => state.userName);
 
   const username = Form.useWatch('username', registerForm);
-  const { data: usernameCheck, isLoading: isCheckingUsername } = useCheckUsername(
+  const { data: usernameCheck } = useCheckUsername(
     username || '',
     activeTab === 'register' && !!username && username.length >= 3
   );

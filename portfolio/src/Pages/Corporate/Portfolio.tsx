@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CorporatePortfolioPage: React.FC = () => {
   const accessToken = useAuthStore((state) => state.accessToken);
-  const userName = useAuthStore((state) => state.userName);
+
   const navigate = useNavigate();
 
   const pageIndex = 1;
