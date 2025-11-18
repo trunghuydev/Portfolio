@@ -10,12 +10,15 @@ import {
   DatePicker,
   InputNumber,
   Upload,
+  Spin,
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { useAuthStore } from '@/Store/auth';
 import { useProfile } from '@/Hook/usegetInform';
 import { useEditProfile } from './Hook/useEditProfile';
+import { useQueryClient } from '@tanstack/react-query';
+import { QueryKeys } from '@/Constants/query-key';
 
 const { Title } = Typography;
 
@@ -23,6 +26,7 @@ const AdminEditProfile = () => {
   const [form] = Form.useForm();
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string>('');
+  const queryClient = useQueryClient();
 
   const { id: user_id, accessToken } = useAuthStore();
 
@@ -33,15 +37,12 @@ const AdminEditProfile = () => {
   const { data: profile, isLoading: isProfileLoading } = useProfile(accessToken);
   const { mutate: updateProfile, isPending } = useEditProfile(accessToken);
 
+  // Set avatar preview when profile loads
   useEffect(() => {
-    if (profile) {
+    if (profile?.avatar) {
       setAvatarPreview(profile.avatar);
-      form.setFieldsValue({
-        ...profile,
-        dob: profile.dob ? dayjs(profile.dob, 'DD/MM/YYYY') : null,
-      });
     }
-  }, [profile]);
+  }, [profile?.avatar]);
 
   const onFinish = async (values: any) => {
     if (!user_id) {
@@ -72,6 +73,10 @@ const AdminEditProfile = () => {
     updateProfile(formData, {
       onSuccess: (res) => {
         message.success(res.message || 'Cập nhật thành công!');
+        // Invalidate and refetch profile data
+        queryClient.invalidateQueries({ queryKey: [QueryKeys.PROFILE, accessToken] });
+        // Reset avatar file after successful update
+        setAvatarFile(null);
       },
       onError: (err: any) => {
         console.error(err);
@@ -80,17 +85,37 @@ const AdminEditProfile = () => {
     });
   };
 
+  // Show loading spinner while fetching profile data
+  if (isProfileLoading) {
+    return (
+      <div className="max-w-3xl p-6 mx-auto bg-white rounded-md shadow-md">
+        <div className="flex justify-center items-center min-h-[400px]">
+          <Spin size="large" tip="Đang tải thông tin..." />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-3xl p-6 mx-auto bg-white rounded-md shadow-md">
       <Title level={3}>Chỉnh sửa thông tin cá nhân</Title>
 
-      <Form layout="vertical" form={form} onFinish={onFinish}>
+      <Form 
+        layout="vertical" 
+        form={form} 
+        onFinish={onFinish}
+        validateTrigger={['onBlur', 'onSubmit']}
+        initialValues={profile ? {
+          ...profile,
+          dob: profile.dob ? dayjs(profile.dob, 'DD/MM/YYYY') : null,
+        } : undefined}
+      >
         <Form.Item label="Họ và tên" name="fullname" rules={[{ required: true }]}>
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Email" name="email" rules={[{ required: true, type: 'email' }]}>
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Ngày sinh" name="dob">
@@ -98,15 +123,15 @@ const AdminEditProfile = () => {
         </Form.Item>
 
         <Form.Item label="Số điện thoại" name="phone_number">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Địa chỉ" name="address">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Trường đại học" name="university_name">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="GPA" name="gpa">
@@ -118,19 +143,19 @@ const AdminEditProfile = () => {
         </Form.Item>
 
         <Form.Item label="Github" name="github">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="LinkedIn" name="linkedin_url">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Facebook" name="facebook_url">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Vị trí làm việc" name="position_career">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Mindset" name="mindset">

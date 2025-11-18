@@ -149,13 +149,22 @@ const AdminEditCertificate = () => {
       </div>
 
       {(isCreating || selectedCertificate) && (
-        <Form layout="vertical" form={form} onFinish={handleSubmit} className="mb-6">
+        <Form 
+          layout="vertical" 
+          form={form} 
+          onFinish={handleSubmit} 
+          className="mb-6"
+          validateTrigger={['onBlur', 'onSubmit']}
+        >
           <Form.Item
             label="Tên Certificate"
             name="certificate_name"
             rules={[{ required: true, message: 'Vui lòng nhập tên certificate' }]}
           >
-            <Input placeholder="VD: AWS Certified Solutions Architect, Google Cloud Professional" />
+            <Input 
+              placeholder="VD: AWS Certified Solutions Architect, Google Cloud Professional" 
+              autoComplete="off" 
+            />
           </Form.Item>
 
           <Form.Item>

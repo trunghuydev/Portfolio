@@ -216,7 +216,12 @@ const AdminEditProjects = () => {
         </Button>
       </div>
 
-      <Form layout="vertical" form={form} onFinish={handleSubmit}>
+      <Form
+        layout="vertical"
+        form={form}
+        onFinish={handleSubmit}
+        validateTrigger={['onBlur', 'onSubmit']}
+      >
         {selectedProject && (
           <Form.Item name="project_id" hidden>
             <Input />
@@ -228,7 +233,7 @@ const AdminEditProjects = () => {
           name="project_name"
           rules={[{ required: true, message: 'Vui lòng nhập tên dự án' }]}
         >
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Mô tả" name="description">
@@ -236,7 +241,7 @@ const AdminEditProjects = () => {
         </Form.Item>
 
         <Form.Item label="Loại dự án" name="project_type">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item name="is_Reality" valuePropName="checked">
@@ -244,27 +249,27 @@ const AdminEditProjects = () => {
         </Form.Item>
 
         <Form.Item label="Thời gian" name="duration">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Từ" name="from">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Đến" name="to">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="URL chính" name="url_project">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Demo" name="url_demo">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="GitHub" name="url_github">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Hình ảnh">
@@ -287,15 +292,15 @@ const AdminEditProjects = () => {
         </Form.Item>
 
         <Form.Item label="Hợp đồng (nếu có)" name="url_contract">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="File Excel (nếu có)" name="url_excel">
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Công nghệ (VD: React, NodeJS)" name="teches">
-          <Input placeholder="Ngăn cách bởi dấu phẩy" />
+          <Input placeholder="Ngăn cách bởi dấu phẩy" autoComplete="off" />
         </Form.Item>
 
         <Form.Item>

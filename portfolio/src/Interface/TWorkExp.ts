@@ -1,16 +1,12 @@
 
-
-// Base chỉ có nội dung task
 export type WorkExpTaskBase = {
   task_description: string;
 };
 
-// Task đã tồn tại (BE trả về) — luôn có mt_id
 export type WorkExpTask = WorkExpTaskBase & {
   mt_id: string;
 };
 
-// Payload khi CREATE — KHÔNG có mt_id
 export type WorkExpTaskCreate = WorkExpTaskBase;
 export type WorkExpTaskUpdateBody = {
   myTask_id: string;

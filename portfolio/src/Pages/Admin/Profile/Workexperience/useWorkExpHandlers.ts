@@ -17,29 +17,22 @@ import {
 } from '@/Interface/TWorkExp';
 import { useUpdateWorkexp } from '../Hook/ useUpdateWorkexp';
 
-// Helper: lấy message từ AxiosError 
 const getErrMsg = (err: unknown, fallback: string) => {
   const e = err as AxiosError<{ msg?: string; message?: string }>;
   return e?.response?.data?.msg || e?.response?.data?.message || fallback;
 };
 
 export const useWorkExpHandlers = (accessToken: string, pageIndex: number = 1) => {
-  // List WorkExp
   const { data, isLoading, refetch } = useWorkexp(accessToken, pageIndex); 
 
-  // WorkExp mutations
   const { mutate: updateWorkExp, isPending: isUpdating } = useUpdateWorkexp(accessToken);
   const { mutate: deleteWorkExp, isPending: isDeleting } = useDeleteWorkexp(accessToken);
   const { mutate: createWorkExp, isPending: isCreating } = useCreateWorkexp(accessToken);
 
-  // Task mutations
   const { mutate: createTask, isPending: isCreatingTask } = useCreateTask(accessToken);
   const { mutate: editTask, isPending: isUpdatingTask } = useEditTask(accessToken);
   const { mutate: removeTask, isPending: isDeletingTask } = useDeleteTask(accessToken);
 
-  //  WORKEXP 
-
-  // UPDATE WORK 
   const handleUpdate = (values: WorkExp) => {
     const { we_id, ...payload } = values;
 
@@ -63,7 +56,6 @@ export const useWorkExpHandlers = (accessToken: string, pageIndex: number = 1) =
     );
   };
 
-  // DELETE WORK 
   const handleDelete = (we_id: string, tasksLength: number) => {
     if (tasksLength > 0) {
       message.warning(' Bạn cần xoá hết các Task trước khi xoá Work Experience này.');
@@ -79,7 +71,6 @@ export const useWorkExpHandlers = (accessToken: string, pageIndex: number = 1) =
     });
   };
 
-  // CREATE WORK 
   const handleCreate = (values: WorkExperiencePayload, onDone?: () => void) => {
     const normalizedPayload: WorkExperiencePayload = {
       ...values,
@@ -97,9 +88,6 @@ export const useWorkExpHandlers = (accessToken: string, pageIndex: number = 1) =
     });
   };
 
-  // TASKS 
-
-  // UPDATE 1 task 
   const handleUpdateTask = (we_id: string, mt_id: string, task_description: string) => {
     editTask(
       { we_id, body: { myTask_id: mt_id, task_description } },
@@ -113,7 +101,6 @@ export const useWorkExpHandlers = (accessToken: string, pageIndex: number = 1) =
     );
   };
 
-  // DELETE 1 task 
   const handleDeleteTask = (_we_id: string, mt_id: string) => {
     removeTask(
       { mt_id },
@@ -127,7 +114,6 @@ export const useWorkExpHandlers = (accessToken: string, pageIndex: number = 1) =
     );
   };
 
-  // CREATE nhiều task 
   const handleCreateTasks = (
     we_id: string,
     values: { dynamicTasks?: WorkExpTaskCreate[] }
@@ -154,16 +140,12 @@ export const useWorkExpHandlers = (accessToken: string, pageIndex: number = 1) =
     data,
     isLoading,
     refetch,
-
-    // loading states
     isCreating,
     isUpdating,
     isDeleting,
     isCreatingTask,
     isUpdatingTask,
     isDeletingTask,
-
-    // handlers
     handleCreate,
     handleUpdate,
     handleDelete,

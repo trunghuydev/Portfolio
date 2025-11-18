@@ -5,7 +5,6 @@ import { useMutation } from "@tanstack/react-query";
 import type { WorkExperienceUpdateRs ,WorkExpTaskUpdateBody} from "@/Interface/TWorkExp";
 
 type EditVars = { we_id: string; body: WorkExpTaskUpdateBody }; 
-// body: { mt_id: string; task_description: string }
 
 export const useEditTask = (accessToken: string) => {
   const api = docApi(createAxiosClient(accessToken));

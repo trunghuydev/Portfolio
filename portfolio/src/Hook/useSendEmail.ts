@@ -4,8 +4,8 @@ import { docApi } from '@/api/docApi';
 import { createAxiosClient } from '@/api/axiosClient';
 import { message } from 'antd';
 
-export const useSendEmail = (accessToken: string) => {
-  const api = docApi(createAxiosClient(accessToken));
+export const useSendEmail = (accessToken?: string) => {
+  const api = docApi(createAxiosClient(accessToken || ''));
 
   return useMutation<EmailResponse, Error, EmailPayload>({
     mutationFn: (body: EmailPayload) => api.sendEmail(body),

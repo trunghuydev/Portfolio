@@ -1,16 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './Context/AuthContext';
 
-// import LoginPage from './Pages/Login/Login';
-
+import LandingPage from './Pages/Landing/LandingPage';
 import AdminLayout from './Pages/Admin/AdminLayout';
 import AdminEditProfile from './Pages/Admin/Profile/EditProfile';
-import PortfolioHuy from './Pages/T_Huy/Portfolio';
-import PortfolioHan from './Pages/Han/Portfolio';
-import PortfolioThanh from './Pages/Thanh/Portfolio';
-import PortfolioPhong from './Pages/Phong/Portfolio';
-import PortfolioNam from './Pages/H_Nam/Portfolio';
-import PortfolioThy from './Pages/Thy/Portfolio';
+import PublicPortfolio from './Pages/Portfolio/PublicPortfolio';
+import CorporatePortfolioPage from './Pages/Corporate/Portfolio';
 
 import AdminEditProject from './Pages/Admin/Profile/EditProject';
 import AdminEditWorkexp from './Pages/Admin/Profile/Workexperience/AdminEditWorkexp';
@@ -22,12 +17,9 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/trung-huy" element={<PortfolioHuy />} />
-          <Route path="/tuong-han" element={<PortfolioHan />} />
-          <Route path="/trung-thanh" element={<PortfolioThanh />} />
-          <Route path="/kien-phong" element={<PortfolioPhong />} />
-          <Route path="/hoai-nam" element={<PortfolioNam />} />
-          <Route path="/anh-thy" element={<PortfolioThy />} />
+          <Route path="/" element={<LandingPage />} />
+
+          <Route path="/my-cv" element={<CorporatePortfolioPage />} />
 
           <Route path="/a-dmin" element={<AdminLayout />}>
             <Route path="edit-profile" element={<AdminEditProfile />} />
@@ -36,6 +28,8 @@ function App() {
             <Route path="edit-skill" element={<AdminEditSkill />} />
             <Route path="edit-certificate" element={<AdminEditCertificate />} />
           </Route>
+
+          <Route path="/:username" element={<PublicPortfolio />} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -163,17 +163,23 @@ const AdminEditSkill = () => {
       </div>
 
       {(isCreating || selectedSkill) && (
-        <Form layout="vertical" form={form} onFinish={handleSubmit} className="mb-6">
+        <Form 
+          layout="vertical" 
+          form={form} 
+          onFinish={handleSubmit} 
+          className="mb-6"
+          validateTrigger={['onBlur', 'onSubmit']}
+        >
           <Form.Item
             label="Tên Skill"
             name="skill_name"
             rules={[{ required: true, message: 'Vui lòng nhập tên skill' }]}
           >
-            <Input placeholder="VD: React, Node.js, Python" />
+            <Input placeholder="VD: React, Node.js, Python" autoComplete="off" />
           </Form.Item>
 
           <Form.Item label="Position" name="position">
-            <Input placeholder="VD: Frontend, Backend, Full Stack" />
+            <Input placeholder="VD: Frontend, Backend, Full Stack" autoComplete="off" />
           </Form.Item>
 
           <Form.Item>

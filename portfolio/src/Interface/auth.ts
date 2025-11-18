@@ -24,7 +24,17 @@ export interface DevRegisterPayload {
 }
 
 export interface DevRegisterResponse {
-    userId: string;
+    user_id: string;
+    username: string;
+    email?: string;
+    token: {
+        refreshToken: string;
+        accessToken: string;
+        expiresIn: number;
+        tokenType?: string;
+        createdAt: string;
+    };
+    user_name: string;
 }
 
 export interface RefreshTokenPayload {

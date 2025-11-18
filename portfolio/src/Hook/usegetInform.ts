@@ -1,4 +1,3 @@
-// src/Hook/usegetInform.ts
 import { useQuery } from '@tanstack/react-query';
 
 import { docApi } from '@/api/docApi';

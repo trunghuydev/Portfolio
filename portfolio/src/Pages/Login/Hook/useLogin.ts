@@ -21,11 +21,8 @@ export const useLogin = (): UseMutationResult<LoginResponse, Error, Login> => {
       const { accessToken, refreshToken } = token;
 
       if (accessToken && refreshToken && user_name) {
-        // console.log('Đăng nhập thành công:', user_name);
         setTokens(accessToken, refreshToken, user_name,email);
         setuserId(user_id);
-      } else {
-        // console.warn('Thiếu thông tin đăng nhập từ server.');
       }
     },
 

@@ -38,7 +38,6 @@ export const WorkExpCreateForm: React.FC<Props> = ({ onCreate, loading, onCancel
           <Input.TextArea rows={3} />
         </Form.Item>
 
-        {/* project_id nếu cần */}
         <Form.Item label="Project ID" name="project_id">
           <Input />
         </Form.Item>

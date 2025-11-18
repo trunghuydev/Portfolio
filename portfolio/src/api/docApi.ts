@@ -18,7 +18,6 @@ import { EmailPayload, EmailResponse } from '@/Interface/TEmail';
 import { AxiosInstance } from 'axios';
 
 export const docApi = (axiosInstance: AxiosInstance) => ({
-  /*--------------------------------------Authentication---------------------------------------------------------------- */
   Login: async (body: Login): Promise<LoginResponse> => {
     const url = `/account/log-in`;
     const res = await axiosInstance.post(url, body);
@@ -43,11 +42,21 @@ export const docApi = (axiosInstance: AxiosInstance) => ({
     return res.data;
   },
 
-  /*--------------------------------------Profile---------------------------------------------------------------- */
-
   getProfile: async (): Promise<PersonalInfo> => {
     const url = `/profile`;
     const res = await axiosInstance.get(url);
+    return res.data;
+  },
+
+  updateUsername: async (body: { username: string }): Promise<{ message: string; username: string }> => {
+    const url = `/profile/username`;
+    const res = await axiosInstance.patch(url, body);
+    return res.data;
+  },
+
+  updateVisibility: async (body: { is_public: boolean }): Promise<{ message: string; is_public: boolean }> => {
+    const url = `/profile/visibility`;
+    const res = await axiosInstance.patch(url, body);
     return res.data;
   },
 
@@ -64,7 +73,6 @@ getProject:async(pageIndex=1,pageSize=1):Promise<ProjectResponse>=>{
   return res.data;
 
 },
-  /*--------------------------------------Skills---------------------------------------------------------------- */
 getSkills:async():Promise<Skill[]>=>{
     const url =`/skill`;
     const res = await axiosInstance.get(url);
@@ -72,7 +80,7 @@ getSkills:async():Promise<Skill[]>=>{
 },
 
   addSkill: async (body: { skill_name: string; position?: string }): Promise<Skill> => {
-    const url = `/skill/add-skill`;
+    const url = `/skill`;
     const res = await axiosInstance.post(url, body);
     return res.data;
   },
@@ -95,7 +103,6 @@ getSkills:async():Promise<Skill[]>=>{
     return res.data;
   },
 
-  /*--------------------------------------Projects---------------------------------------------------------------- */
   createProject: async (formData: FormData): Promise<ProjectUpdateResponse> => {
     const url = `/project/create-project`;
     const res = await axiosInstance.post(url, formData, {
@@ -106,7 +113,6 @@ getSkills:async():Promise<Skill[]>=>{
     return res.data;
   },
 
-  /*--------------------------------------Certificates---------------------------------------------------------------- */
   addCertificate: async (body: CertificateCreatePayload): Promise<Certificate> => {
     const url = `/certificate`;
     const res = await axiosInstance.post(url, body);
@@ -125,14 +131,12 @@ getSkills:async():Promise<Skill[]>=>{
     return res.data;
   },
 
-  /*--------------------------------------Email---------------------------------------------------------------- */
   sendEmail: async (body: EmailPayload): Promise<EmailResponse> => {
     const url = `/email`;
     const res = await axiosInstance.post(url, body);
     return res.data;
   },
 
-  /*--------------------------------------Admin---------------------------------------------------------------- */
 editProfile: async (formData: FormData): Promise<UpdateProfileRs> => {
   const user_id = formData.get('user_id');
   const url = `/profile/${user_id}`;
@@ -161,13 +165,6 @@ editProfile: async (formData: FormData): Promise<UpdateProfileRs> => {
     formData: FormData
   ): Promise<ProjectUpdateResponse> => {
     const url = `/project/${project_id}`;
-    
-  
-    console.log('Sending update request to:', url);
-    for (const [key, val] of formData.entries()) {
-      console.log(`FormData[${key}]:`, val);
-    }
-    
     const res = await axiosInstance.patch(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -198,6 +195,16 @@ editProfile: async (formData: FormData): Promise<UpdateProfileRs> => {
   editMytask: async (body: { task_description: string }, we_id: string): Promise<WorkExperienceUpdateRs> => {
     const url = `/mytask/update/${we_id}`; 
     const res = await axiosInstance.patch(url, body);
+    return res.data;
+  },
+
+  uploadImage: async (formData: FormData): Promise<{ url: string }> => {
+    const url = `/storage/upload`;
+    const res = await axiosInstance.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return res.data;
   },
 

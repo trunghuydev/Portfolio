@@ -6,7 +6,6 @@ import { useAuthStore } from '@/Store/auth';
 
 export const useRefreshToken = () => {
   const setTokens = useAuthStore((state) => state.setTokens);
-  // const refreshToken = useAuthStore((state) => state.refreshToken);
   const userName = useAuthStore((state) => state.userName);
   const email = useAuthStore((state) => state.email);
 

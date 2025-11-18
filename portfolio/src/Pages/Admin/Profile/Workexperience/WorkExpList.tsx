@@ -17,7 +17,6 @@ interface WorkExpListProps {
     we_id: string,
     values: { dynamicTasks?: Pick<WorkExpTask, 'task_description'>[] }
   ) => void;
-  // dùng mt_id thay vì myTask_id
   onUpdateTask: (we_id: string, mt_id: string, task_description: string) => void;
   onDeleteTask: (we_id: string, mt_id: string) => void;
 }
@@ -42,7 +41,6 @@ export const WorkExpList: React.FC<WorkExpListProps> = ({
 
         return (
           <Panel header={item.company_name} key={item.we_id}>
-            {/* UPDATE WORK */}
             <Form layout="vertical" initialValues={item} onFinish={onUpdate} key={item.we_id}>
               <Form.Item name="we_id" hidden>
                 <Input />
@@ -90,7 +88,6 @@ export const WorkExpList: React.FC<WorkExpListProps> = ({
               </Form.Item>
             </Form>
 
-            {/* EXISTING TASKS (editable) */}
             {existingTasks.length > 0 && (
               <>
                 <Divider />
@@ -139,7 +136,6 @@ export const WorkExpList: React.FC<WorkExpListProps> = ({
               </>
             )}
 
-            {/* CREATE NEW TASKS */}
             <Divider />
             <Form
               layout="vertical"
